@@ -1,0 +1,114 @@
+common:
+  title: &title "melloc()"
+  description: &description |
+      Welcome! 
+      
+      I am Gabriel Mello Silva, currently working as a Machine Learning Engineer.
+      This is my personal blog where I would like to register many things I 
+      learn along the way. Also it is a place where I can write about random-ish 
+      (Data) Science subjects.
+
+theme: "hugo-PaperMod"
+baseURL: "/"
+title: *title
+
+params:
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  description: ""
+  author: "Gabriel Mello Silva" # multiple authors: ["Me", "You"]
+  keywords:
+    - "Data Science"
+    - "Machine Learning"
+    - "Programming"
+    - "R"
+    - "Python"
+  dateFormat: "2006-01-02"
+  math: true
+  defaultTheme: auto
+  showShareButtons: true
+  showReadingTime: true
+  showPostNavLinks: true
+  showBreadCrumbs: true
+  showTOC: true
+  showCodeCopyButtons: true
+  disableThemeToggle: false
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  disableAnchoredHeadings: false
+  displayFullLangName: true
+  comments: true
+  images: []
+  
+  cover:
+    linkFullImages: true
+    hiddenInSingle: true
+    
+  homeInfoParams:
+    Title: *title
+    Content: *description
+    
+  profileMode:
+    enabled: false
+    title: *title
+    subtitle: *description
+    imageUrl: ""
+    imageTitle: *title
+    imageWidth: 120
+    imageHeight: 120
+    buttons:
+      - name: Archives
+        url: archives
+      - name: Tags
+        url: tags
+      
+  socialIcons:
+    - name: email
+      url: "mailto: gabriel.zyx@gmail.com"
+    - name: github
+      url: "https://github.com/gabriel-msilva"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/gabriel-mello-silva/"
+
+  editPost:
+    URL: "https://github.com/gabriel-msilva/melloc"
+    Text: "Suggest Changes"
+    appendFilePath: false
+  
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: ["title", "permalink", "summary", "content"]
+
+menu:
+  main:
+    - identifier: archives
+      name: Archives
+      url: /archives/
+      weight: 10
+    - identifier: categories
+      name: Categories
+      url: /categories/
+      weight: 20
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 30
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 40
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # is necessary

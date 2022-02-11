@@ -1,0 +1,9 @@
+/*
+Overrides themes/hugo-PaperMod/assets/css/post-single.css `.post-content img`
+to allow centering images with RMarkdown + knitr
+*/
+
+.post-content img {
+  border-radius: 4px;
+  margin: 0 auto;
+}

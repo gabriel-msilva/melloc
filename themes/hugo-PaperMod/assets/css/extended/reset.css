@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  src: 
+    local('Merriweather'), 
+    local('Merriweather-Regular'),
+    url('../fonts/merriweather-v13-latin-regular.woff2') format('woff2'),
+    url('../fonts/merriweather-v13-latin-regular.woff') format('woff');
+}
+
+body {
+  font-family: 'Merriweather', serif;
+  font-size: 18px;
+  line-height: 1.6;
+  word-break: break-word;
+  background: var(--theme);
+}
