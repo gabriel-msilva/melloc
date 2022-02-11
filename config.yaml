@@ -36,7 +36,7 @@ params:
   disableScrollToTop: false
   disableAnchoredHeadings: false
   displayFullLangName: true
-  comments: true
+  comments: false
   images: []
   
   cover:
