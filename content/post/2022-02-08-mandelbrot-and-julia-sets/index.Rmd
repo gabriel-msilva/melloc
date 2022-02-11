@@ -1,0 +1,246 @@
+---
+title: "Mandelbrot and Julia sets"
+description: "To infinity and beyond with fractals"
+summary: >
+  Fractals are a beautifully complex -- and I usually do not use these words 
+  together -- topic in Mathematics. This post scratches the theory behind with
+  two well-know fractals.
+date: "2022-02-08"
+archives: "2022"
+cover:
+    image: "https://cdn.pixabay.com/photo/2011/04/21/03/39/romanesco-6996_960_720.jpg"
+fig_caption: true
+slug: []
+categories:
+  - "Math"
+  - "Python"
+tags:
+  - "fractals"
+  - "data visualization"
+header-includes:
+   - \usepackage{subfig}
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(reticulate)
+library(dplyr)
+library(ggplot2)
+library(showtext)
+
+knitr::opts_chunk$set(fig.align = "center", out.width="100%", echo = FALSE)
+
+font_add_google("Merriweather")
+showtext_auto()
+
+fig_links <- list(
+  static = c(
+    sierpinski_triangle = "https://www.dropbox.com/s/sr87a4gwekuh85s/sierpinski-triangle.png?raw=1",
+    sierpinski_steps = "https://www.dropbox.com/s/fxhg9nlvvb7almd/sierpinski-steps.png?raw=1",
+    mandelbrot_bw = "https://www.dropbox.com/s/9cw3rfdqy0nfhka/mandelbrot-bw.png?raw=1",
+    mandelbrot_colored = "https://www.dropbox.com/s/x02dxx4pa1bj8r6/mandelbrot-colored.png?raw=1",
+    mandelbrot_smoothing = "https://www.dropbox.com/s/1jv3a9qbx1kyd0l/mandelbrot-smoothing.png?raw=1",
+    mandelbrot_zoom = "https://www.dropbox.com/s/lgblqep6e2no84i/mandelbrot-zoom.png?raw=1",
+    julia_set = "https://www.dropbox.com/s/zp2605qc7i5c63p/julia-set.png?raw=1"
+  ),
+  animated = c(
+    julia_circumference = "https://www.dropbox.com/s/ub45unu7texx44h/julia-circumference.gif?raw=1",
+    julia_segment = "https://www.dropbox.com/s/ydt693egnbr3qq8/julia-segment.gif?raw=1",
+    julia_zoom = "https://www.dropbox.com/s/17cu8guqlsecxwb/julia-zoom.gif?raw=1",
+    mandelbrot_zoom = "https://www.dropbox.com/s/xq967gypty3cr6v/mandelbrot-zoom.gif?raw=1"
+  )
+)
+
+quadratic_map <- function(z_0, c, max_iter = 100L) {
+  z <- c(z_0, rep(Inf, max_iter))
+  
+  for (i in seq_along(z[-1])) {
+    if (is.infinite(z[i])) {
+      break
+    }
+    
+    z[i + 1] = z[i]^2 + c
+  }
+  
+  tibble(c = c, iter = 0:max_iter, z = z) %>% filter(!is.infinite(z))
+}
+```
+
+*You can find the code used to generate the post's images and animations in [my GitHub repository](https://github.com/gabriel-msilva/fractal-sets).*
+
+Fractals are a beautifully complex -- and I usually do not use these words together -- topic in Mathematics. Among many conceptual disagreements between mathematicians, at some point [Benoit Mendelbrot](https://en.wikipedia.org/wiki/Benoit_Mandelbrot) proposed a simple and approachable definition:
+
+> A fractal is a shape made of parts similar to the whole in some way.
+
+Figure \@ref(fig:sierpinski-triangle) illustrates this. You could painstakingly count how many triangles do you see to measure your IQ in some online test, but let's look at some properties of this shape.
+
+```{r sierpinski-triangle, out.width="80%", fig.link=fig_links$static["sierpinski_triangle"], fig.cap="A simple example of a fractal, called Sierpiński triangle. The triangular patterns repeat over and over in smaller scales."}
+knitr::include_graphics(fig_links$static["sierpinski_triangle"])
+```
+
+We notice that the main equilateral triangle repeats itself into many other smaller triangles. More formally, this property is called [self-similarity](https://en.wikipedia.org/wiki/Self-similarity), when parts of a shape have exactly or approximately similar parts of itself ("the whole"). This is observed by zooming into the shape, just to find the same patterns again.
+
+Despite the figure presenting a limited number of triangles, you could easily extrapolate the shape at arbitrarily smaller scales by understanding the repeating pattern, the *rule* used to create this shape. Maybe something like:
+
+  1. Start with an equilateral triangle of any size;
+  2. Inscribe another equilateral triangle into it and remove this area;
+  3. Repeat step 2 for each triangle formed
+
+Figure \@ref(fig:sierpinski-triangle) illustrates the first iterations Notice that this set of rules does not [halt](https://en.wikipedia.org/wiki/Halting_problem), *i.e.* it goes on indefinitely. If you did not stop drawing this pattern, you would obtain a fractal called [Sierpiński triangle](https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle).
+
+```{r sierpinski-steps, fig.link=fig_links$static["sierpinski_steps"], fig.cap="First iterations to build a Sierpiński triangle."}
+knitr::include_graphics(fig_links$static["sierpinski_steps"])
+```
+
+This a simple example of a fractal. There are many others that create more complex patterns, but not necessarily by much more complex rules. [Gaston Julia](https://en.wikipedia.org/wiki/Gaston_Julia) and Benoit Mendelbrot were influential mathematicians in fractal geometry, well-known for the sets which take their names.
+
+
+## Mandelbrot set
+
+The Mandelbrot set is the set of complex numbers $c = x + yi$ for which the sequence
+
+$$
+z_{n + 1} = z_n^2 + c, \quad z_0 = 0
+$$
+
+does not diverge as $n$ grows. For example, when $c = -1$,
+
+\begin{alignat}{4}
+  z_0 &=&     &     &  0 \\
+  z_1 &=& 0^2 & -1 =&  1 \\
+  z_2 &=& 1^2 & -1 =&  2 \\
+  z_3 &=& 2^2 & -1 =&  5 \\
+  z_4 &=& 5^2 & -1 =& 26 \\
+      & \dots            \\
+\end{alignat}
+
+We can see that $|z_n| \rightarrow \infty$ when $n \rightarrow \infty$ and thus $c = -1$ is *not* part of the Mandelbrot set. On the other hand, for $c = -1$, $z_n$ oscillates between $-1$ and $0$, i.e. it remains *bounded*, so it belongs to the set.
+
+\begin{alignat}{4}
+  z_0 &=&        &     &   0 \\
+  z_1 &=& 0^2    & -1 =& -1 \\
+  z_2 &=& (-1)^2 & -1 =&  0 \\
+  z_3 &=& 0^2    & -1 =& -1 \\
+  z_4 &=& (-1)^2 & -1 =&  0 \\
+      & \dots               \\
+\end{alignat}
+
+For the boundary $|z| \leq 2$ ($|z| = \sqrt{x^2 + y^2}$, so a circle in the complex plane), the Mandelbrot set looks like Figure \@ref(fig:mandelbrot-bw). We are looking at $c$ points for which $|z_n| \leq 2$ for every $n = \{1, 2, 3, \dots, 100\}$ iteration. 
+
+```{r mandelbrot-bw, fig.link=fig_links$static["mandelbrot_bw"], fig.cap="The Mandelbrot set for 100 iterations."}
+knitr::include_graphics(fig_links$static["mandelbrot_bw"])
+```
+
+It also interesting to see *how many iterations* does it take for $z_n$ to escape the boundary. For $c = -0.8 + 0.5i$ in Figure \@ref(fig:z-escape), $z$ takes $n = 6$ iterations to escape the boundary.
+
+```{r z-escape, fig.cap="For $c = -0.8+ 0.5i$, $z$ escapes the boundary $|z| \\leq 2$ at the 6th iteration."}
+quadratic_map(0, -.8 + .5i, max_iter = 6L) %>% 
+  ggplot(aes(x = Re(z), y = Im(z))) +
+  ggforce::geom_circle(
+    aes(x0 = 0, y0 = 0, r = 2), 
+    fill = "gray80",
+    color = "gray80",
+    alpha = 0.10,
+    inherit.aes	= FALSE
+    ) +
+  geom_path()  + 
+  geom_label(aes(label = paste0("z[", iter, "]"), color = abs(z) <= 2), 
+             size=9, parse = TRUE) +
+  coord_equal(x = c(-3, 3), y = c(-3, 3)) +
+  theme_light() +
+  theme(legend.position = "none", 
+        text = element_text(family = "Merriweather", size = 28, color = "gray30"))
+```
+
+If we map this iteration count to the color aesthetic of each point $c$, we get Figure \@ref(fig:mandelbrot-colored).
+
+```{r mandelbrot-colored, fig.link=fig_links$static["mandelbrot_colored"], fig.cap="Colored Mandelbrot set for 100 iterations, where the color represents the iteration $n$ when $|z_n| > 2$."}
+knitr::include_graphics(fig_links$static["mandelbrot_colored"])
+```
+
+But where is the self-similarity? We need to zoom-in to see it better – and there are many “hidden” repeating patterns inside the Mandelbrot set. Figure \@ref(fig:mandelbrot-zoom) focus on one of these, but you probably can spot other across the way.
+
+```{r mandelbrot-zoom, fig.link=fig_links$animated["mandelbrot_zoom"], fig.cap="Self-similarity in the Mandelbrot set."}
+knitr::include_graphics(fig_links$animated["mandelbrot_zoom"])
+```
+
+Actually, the colored Mandelbrot is not so smooth as can be seen on Figure \@ref(fig:mandelbrot-colored). It creates "bands of color" as in Figure \@ref(fig:mandelbrot-smoothing)a, because the iteration count is a natural number. The *continuous* coloring (Figure \@ref(fig:mandelbrot-smoothing)b) is obtained by applying an [algorithm called "normalized iteration  count"](https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set#Continuous_(smooth)_coloring), which adds $\delta \in [0, 1[$ to iteration count as function of $|z|$.
+
+```{r mandelbrot-smoothing, fig.link=fig_links$static["mandelbrot_smoothing"], fig.cap="Continuous (smooth) coloring on the Mandelbrot set."}
+knitr::include_graphics(fig_links$static["mandelbrot_smoothing"])
+```
+
+## Julia set
+
+Similarly to the Mandelbrot set, the Julia set is the set of complex numbers $z$ for which the recursive function
+
+$$
+R(z) = \frac{P(z)}{Q(z)}
+$$
+
+does not diverge (or escapes a boundary) for a increasing number of iterations. $P$ and $Q$ are polynomials without common divisors. Consider a particular Julia set where $R(z) = z^2 + c$, then we have an equation analogous to the *logistic mapping* of the Mandelbrot set
+
+$$
+z_{n + 1} = z_n^2 + c
+$$
+
+but for a fixed complex $c$ instead of a fixed $z_0$. In the same manner, we will count how many iterations does it take for $z_n$ to escape the boundary $|z| \leq 2$ for a given $c$. Figure \@ref(fig:julia-set) shows this particular Julia set for two values of $c$.
+
+```{r julia-set, fig.link=fig_links$static[["julia_set"]], fig.cap="Quadractic Julia sets for (a) $c = -1$ and (b) $c = i$ with 200 iterations."}
+knitr::include_graphics(fig_links$static[["julia_set"]])
+```
+
+The Julia set also has many self-similarities, as illustrated by Figure \@ref(fig:julia-zoom).
+
+```{r julia-zoom, fig.link=fig_links$animated["julia_zoom"], fig.cap="Zooming in point $z \\approx 1.618$ of the Julia set $J_c(z) = z^2 + c$ for $c = -1$."}
+knitr::include_graphics(fig_links$animated["julia_zoom"])
+```
+
+
+## Relation between Mandelbrot and Julia sets
+
+While Mandelbrot set is mapped into $z$ complex plane, Julia set is mapped into $c$ complex plane. So, for each point of the Mandelbrot set there is a corresponding Julia set, and vice versa. Figure \@ref(fig:julia-segment) shows this correspondence along a line segment on the Mandelbrot set.
+
+```{r julia-segment, fig.link=fig_links$animated["julia_segment"], fig.cap="Julia sets $J_c(f)$ along the line segment $c = ai, -1 \\leq a \\leq 1$."}
+knitr::include_graphics(fig_links$animated["julia_segment"])
+```
+
+Let’s take this opportunity to remember "the most remarkable formula in mathematics", the [Euler's formula](https://en.wikipedia.org/wiki/Euler%27s_formula):
+
+$$
+e^{i x} = \cos x + i \sin x, \quad \text{for any } x \in \mathbb{R}
+$$
+When $x = \pi$, 
+
+$$
+e^{i\pi} + 1 = 0
+$$
+
+A beautiful identity as it contains five of the most fundamental numbers in Mathematics. Let $c = r e^{i \theta}$, then
+
+$$
+\begin{cases}
+  \mathrm{Re}(c) = r \cos{\theta} \\
+  \mathrm{Im}(c) = r \sin{\theta}
+\end{cases}
+$$
+
+which is a circumference in the complex plane, thus connecting trigonometry and complex numbers. Figure \@ref(fig:julia-circumference) shows Julia sets for a counter-clockwise rotation around a circumference $r e^{i \theta}$.
+
+```{r julia-circumference, fig.link=fig_links$animated["julia_circumference"], fig.cap="Julia sets $J_c(f)$ around the circumference $c = 0.7885 e^{i \\theta}$ in the complex plane."}
+knitr::include_graphics(fig_links$animated["julia_circumference"])
+```
+
+## Final notes
+
+Fractal shapes can be seen in Nature like in a humble [cauliflower](https://www.nytimes.com/2021/07/08/science/cauliflower-fractals.html), but they are also applied in technology, like in [fractal antennas](https://en.wikipedia.org/wiki/Fractal_antenna), or in explaining [considerable differences in coastline length measurements](https://en.wikipedia.org/wiki/Coastline_paradox).
+
+Aside from its applications, I think fractals are just pretty neat. I mean, look at this:
+
+<p align="center">
+  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/MLEHL8hcKJk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+
+To close, my recommendation of a couple of videos from amazing YouTube channels to dive more into fractals.
+
+- [This equation will change how you see the world (the logistic map), Veritasium](https://www.youtube.com/watch?v=ovJcsL7vyrk)
+- [Fractals are typically not self-similar, 3Blue1Brown](https://www.youtube.com/watch?v=gB9n2gHsHN4)
