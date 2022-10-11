@@ -18,6 +18,7 @@ R packages are managed by [renv](https://rstudio.github.io/renv/articles/renv.ht
   ```bash
   sudo apt-get install libcurl4-openssl-dev
   sudo apt-get install libfreetype6-dev
+  sudo apt-get install libfontconfig1-dev
   ```
 
 * [`png`](https://stackoverflow.com/questions/21800909/cannot-build-r-package-png-fedora-20)
@@ -30,6 +31,11 @@ R packages are managed by [renv](https://rstudio.github.io/renv/articles/renv.ht
 
   ```bash
   sudo apt-get install r-base-dev
+  ```
+* Hugo for blogdown
+
+  ```r
+  blogdown::install_hugo("0.92.0")
   ```
 
 ### Support Math expressions through MathJax
