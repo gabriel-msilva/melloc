@@ -67,6 +67,8 @@ quadratic_map <- function(z_0, c, max_iter = 100L) {
 
 *You can find the code used to generate the post's images and animations in [my GitHub repository](https://github.com/gabriel-msilva/fractal-sets).*
 
+*Update 2022-10-10: Fixed first example for Mandelbrot set. Should be $c = 1$ instead of $c = -1$.*
+
 Fractals are a beautifully complex -- and I usually do not use these words together -- topic in Mathematics. Among many conceptual disagreements between mathematicians, at some point [Benoit Mendelbrot](https://en.wikipedia.org/wiki/Benoit_Mandelbrot) proposed a simple and approachable definition:
 
 > A fractal is a shape made of parts similar to the whole in some way.
@@ -102,18 +104,18 @@ $$
 z_{n + 1} = z_n^2 + c, \quad z_0 = 0
 $$
 
-does not diverge as $n$ grows. For example, when $c = -1$,
+does not diverge as $n$ grows. For example, when $c = 1$,
 
 \begin{alignat}{4}
   z_0 &=&     &     &  0 \\
-  z_1 &=& 0^2 & -1 =&  1 \\
-  z_2 &=& 1^2 & -1 =&  2 \\
-  z_3 &=& 2^2 & -1 =&  5 \\
-  z_4 &=& 5^2 & -1 =& 26 \\
+  z_1 &=& 0^2 & +1 =&  1 \\
+  z_2 &=& 1^2 & +1 =&  2 \\
+  z_3 &=& 2^2 & +1 =&  5 \\
+  z_4 &=& 5^2 & +1 =& 26 \\
       & \dots            \\
 \end{alignat}
 
-We can see that $|z_n| \rightarrow \infty$ when $n \rightarrow \infty$ and thus $c = -1$ is *not* part of the Mandelbrot set. On the other hand, for $c = -1$, $z_n$ oscillates between $-1$ and $0$, i.e. it remains *bounded*, so it belongs to the set.
+We can see that $|z_n| \rightarrow \infty$ when $n \rightarrow \infty$ and thus $c = 1$ is *not* part of the Mandelbrot set. On the other hand, for $c = -1$, $z_n$ oscillates between $-1$ and $0$, i.e. it remains *bounded*, so it belongs to the set.
 
 \begin{alignat}{4}
   z_0 &=&        &     &   0 \\
