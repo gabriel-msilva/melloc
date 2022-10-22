@@ -1,0 +1,63 @@
+name: Build site
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+    paths-ignore:
+      -README.md
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build site
+        uses: ./.github/actions/build-site
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: melloc
+          path: public/
+    
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-20.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+      
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: melloc
+      
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "noreply@github.com"
+      
+      - name: Check changes
+        id: check
+        run: |
+          lines=`git diff --name-only | wc -l`
+          if [ $lines -gt 0 ]; then changed="true"; else changed="false"; fi
+          echo "changed=$changed" >> $GITHUB_OUTPUT
+        
+      - name: Commit and push changes
+        if: steps.check.outputs.changed
+        run: |
+          SHA=${{ github.sha }}
+
+          git add .
+          git commit -m "CI: Update site (${{ github.run_number }} - ${SHA:0:7})"
+          git push origin
