@@ -36,6 +36,11 @@ jobs:
         with:
           ref: gh-pages
       
+      - name: Clean working dir
+        run: |
+          rm -rf *
+          touch .nojekyll
+
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
