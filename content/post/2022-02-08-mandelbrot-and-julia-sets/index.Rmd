@@ -22,7 +22,6 @@ header-includes:
 ---
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
-library(reticulate)
 library(dplyr)
 library(ggplot2)
 library(showtext)

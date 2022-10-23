@@ -26,4 +26,4 @@ runs:
     
     - name: Build site
       shell: Rscript {0}
-      run: blogdown::build_site()
+      run: blogdown::build_site(build_rmd = TRUE)

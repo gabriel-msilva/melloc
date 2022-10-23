@@ -9,7 +9,7 @@ common:
       (Data) Science subjects.
 
 theme: "hugo-PaperMod"
-baseURL: "https://gabriel-msilva.github.io/melloc/"
+baseURL: "/"
 title: *title
 
 params:

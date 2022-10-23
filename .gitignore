@@ -1,6 +1,6 @@
 public/
 content/post/*/index_files/
-content/post/*/*.html
+content/**/*.html
 
 .Rhistory
 .Rproj.user
