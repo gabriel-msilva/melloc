@@ -4,7 +4,7 @@ melloc() blog
 A personal blog built with R's [blogdown](https://bookdown.org/yihui/blogdown/) 
 using a slightly modified [Hugo PaperMod](https://themes.gohugo.io/themes/hugo-papermod/).
 
-> [gabriel-msilva.github.io](https://gabriel-msilva.github.io)
+Visit the blog page at [**gabriel-msilva.github.io/melloc**](https://gabriel-msilva.github.io/melloc)
 
 ---
 
