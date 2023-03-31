@@ -89,6 +89,11 @@ Before writing any more code to your script, you can explore your data set in th
 
 ```python
 In [2]: df
+Out[2]:
+#    x  y
+# 0  1  a
+# 1  2  a
+# 2  3  b
 
 In [3]: df.describe()
 Out[3]: 
