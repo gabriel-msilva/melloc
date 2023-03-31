@@ -2,8 +2,7 @@
 title: Productivity and IPython for Data Science
 description: Set up an interactive Python environment for development in Visual Studio Code
 summary: >
-  Failing when working on something new is a given.
-  Quick iteration over your trials allow you to fail fast and reach your goals.
+  Failing when working on something new is a given. Iterate quickly, fail fast.
   This post shows how IPython can change your workflow and how to set up it on VS Code.
 author: ''
 date: "2023-03-12"
