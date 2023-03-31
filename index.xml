@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>melloc()</title>
+    <link>https://gabriel-msilva.github.io/melloc/</link>
+    <description>Recent content on melloc()</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 12 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://gabriel-msilva.github.io/melloc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Productivity and IPython for Data Science</title>
+      <link>https://gabriel-msilva.github.io/melloc/post/2023-03-12-vscode-ipython-setup/</link>
+      <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://gabriel-msilva.github.io/melloc/post/2023-03-12-vscode-ipython-setup/</guid>
+      <description>Set up an interactive Python environment for development in Visual Studio Code</description>
+    </item>
+    
+    <item>
+      <title>Mandelbrot and Julia sets</title>
+      <link>https://gabriel-msilva.github.io/melloc/post/2022-02-08-mandelbrot-and-julia-sets/</link>
+      <pubDate>Tue, 08 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gabriel-msilva.github.io/melloc/post/2022-02-08-mandelbrot-and-julia-sets/</guid>
+      <description>To infinity and beyond with fractals</description>
+    </item>
+    
+    
+    
+  </channel>
+</rss>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Categories on melloc()</title>
+    <link>https://gabriel-msilva.github.io/melloc/categories/</link>
+    <description>Recent content in Categories on melloc()</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 12 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://gabriel-msilva.github.io/melloc/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Programming</title>
+      <link>https://gabriel-msilva.github.io/melloc/categories/programming/</link>
+      <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://gabriel-msilva.github.io/melloc/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://gabriel-msilva.github.io/melloc/categories/python/</link>
+      <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://gabriel-msilva.github.io/melloc/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Math</title>
+      <link>https://gabriel-msilva.github.io/melloc/categories/math/</link>
+      <pubDate>Tue, 08 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gabriel-msilva.github.io/melloc/categories/math/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
