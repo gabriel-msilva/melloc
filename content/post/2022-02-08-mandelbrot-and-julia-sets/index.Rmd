@@ -7,7 +7,8 @@ summary: >
 date: "2022-02-08"
 archives: "2022"
 cover:
-  image: "https://cdn.pixabay.com/photo/2011/04/21/03/39/romanesco-6996_960_720.jpg"
+  image: "cover.png"
+  alt: "Romanesco cauliflower (https://cdn.pixabay.com/photo/2011/04/21/03/39/romanesco-6996_960_720.jpg)"
 fig_caption: true
 slug: []
 categories:
@@ -31,20 +32,26 @@ font_add_google("Merriweather")
 showtext_auto()
 
 fig_links <- list(
-  static = c(
-    sierpinski_triangle = "https://www.dropbox.com/s/sr87a4gwekuh85s/sierpinski-triangle.png?raw=1",
-    sierpinski_steps = "https://www.dropbox.com/s/fxhg9nlvvb7almd/sierpinski-steps.png?raw=1",
-    mandelbrot_bw = "https://www.dropbox.com/s/9cw3rfdqy0nfhka/mandelbrot-bw.png?raw=1",
-    mandelbrot_colored = "https://www.dropbox.com/s/x02dxx4pa1bj8r6/mandelbrot-colored.png?raw=1",
-    mandelbrot_smoothing = "https://www.dropbox.com/s/1jv3a9qbx1kyd0l/mandelbrot-smoothing.png?raw=1",
-    mandelbrot_zoom = "https://www.dropbox.com/s/lgblqep6e2no84i/mandelbrot-zoom.png?raw=1",
-    julia_set = "https://www.dropbox.com/s/zp2605qc7i5c63p/julia-set.png?raw=1"
+  static = paste0(
+    "figures/static/",
+    c(
+      sierpinski_triangle = "sierpinski-triangle.png",
+      sierpinski_steps = "sierpinski-steps.png",
+      mandelbrot_bw = "mandelbrot-bw.png",
+      mandelbrot_colored = "mandelbrot-colored.png",
+      mandelbrot_smoothing = "mandelbrot-smoothing.png",
+      mandelbrot_zoom = "mandelbrot-zoom.png",
+      julia_set = "julia-set.png"
+    )
   ),
-  animated = c(
-    julia_circumference = "https://www.dropbox.com/s/ub45unu7texx44h/julia-circumference.gif?raw=1",
-    julia_segment = "https://www.dropbox.com/s/ydt693egnbr3qq8/julia-segment.gif?raw=1",
-    julia_zoom = "https://www.dropbox.com/s/17cu8guqlsecxwb/julia-zoom.gif?raw=1",
-    mandelbrot_zoom = "https://www.dropbox.com/s/xq967gypty3cr6v/mandelbrot-zoom.gif?raw=1"
+  animated = paste0(
+    "figures/animated/",
+    c(
+      julia_circumference = "julia-circumference.gif",
+      julia_segment = "julia-segment.gif",
+      julia_zoom = "julia-zoom.gif",
+      mandelbrot_zoom = "mandelbrot-zoom.gif",
+    )
   )
 )
 
