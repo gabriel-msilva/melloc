@@ -11,6 +11,7 @@ common:
 theme: "hugo-PaperMod"
 baseURL: "https://gabriel-msilva.github.io/melloc/"
 title: *title
+googleAnalytics: G-P8SCD19EGZ
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
