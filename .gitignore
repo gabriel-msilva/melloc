@@ -3,6 +3,13 @@ resources/
 content/post/*/index_files/
 content/**/*.html
 
+# Conda prefix
+.conda
+
+# VS Code
+.vscode
+
+# RStudio
 .Rhistory
 .Rproj.user
 .RData

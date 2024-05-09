@@ -1,4 +1,3 @@
-source("renv/activate.R")
 # REMEMBER to restart R after you modify and save this file!
 
 # First, execute the global .Rprofile if it exists. You may configure blogdown
@@ -17,8 +16,6 @@ options(
   # to disable knitting Rmd files on save, set this option to FALSE
   blogdown.knit.on_save = TRUE,
   # build .Rmd to .html (via Pandoc); to build to Markdown, set this option to 'markdown'
-  blogdown.method = 'html'
+  blogdown.method = "html",
+  blogdown.hugo.version = "0.92.0"
 )
-
-# fix Hugo version
-options(blogdown.hugo.version = "0.92.0")
