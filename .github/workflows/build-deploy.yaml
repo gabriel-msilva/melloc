@@ -19,13 +19,13 @@ jobs:
 
       - name: Build site
         uses: ./.github/actions/build-site
-        
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: melloc
           path: public/
-    
+
   deploy:
     needs: [build]
     runs-on: ubuntu-20.04
@@ -38,7 +38,7 @@ jobs:
         with:
           ref: gh-pages
           lfs: true
-      
+
       - name: Clean working dir
         run: |
           rm -rf *
@@ -48,19 +48,19 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: melloc
-      
+
       - name: Configure Git
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "noreply@github.com"
-      
+
       - name: Check changes
         id: check
         run: |
           lines=`git diff --name-only | wc -l`
           if [ $lines -gt 0 ]; then changed="true"; else changed="false"; fi
           echo "changed=$changed" >> $GITHUB_OUTPUT
-        
+
       - name: Commit and push changes
         if: steps.check.outputs.changed
         run: |

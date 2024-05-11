@@ -1,7 +1,6 @@
-melloc() blog
-=============
+# melloc() blog
 
-A personal blog built with R's [blogdown](https://bookdown.org/yihui/blogdown/) 
+A personal blog built with R's [blogdown](https://bookdown.org/yihui/blogdown/)
 using a slightly modified [Hugo PaperMod](https://themes.gohugo.io/themes/hugo-papermod/).
 
 Visit the blog page at [**gabriel-msilva.github.io/melloc**](https://gabriel-msilva.github.io/melloc)
@@ -10,10 +9,10 @@ Visit the blog page at [**gabriel-msilva.github.io/melloc**](https://gabriel-msi
 
 ### Dependencies
 
-Some additional dependencies I needed in order to install all R packages (Pop_OS! 21.10). 
+Some additional dependencies I needed in order to install all R packages (Pop_OS! 21.10).
 R packages are managed by [renv](https://rstudio.github.io/renv/articles/renv.html).
 
-* `showtext`
+- `showtext`
 
   ```bash
   sudo apt-get install libcurl4-openssl-dev
@@ -21,18 +20,19 @@ R packages are managed by [renv](https://rstudio.github.io/renv/articles/renv.ht
   sudo apt-get install libfontconfig1-dev
   ```
 
-* [`png`](https://stackoverflow.com/questions/21800909/cannot-build-r-package-png-fedora-20)
+- [`png`](https://stackoverflow.com/questions/21800909/cannot-build-r-package-png-fedora-20)
 
   ```bash
   sudo apt-get install libpng-dev
   ```
 
-* [`RcppEigen`](https://stackoverflow.com/questions/39811872/r-fails-to-install-packages-at-load-stage-under-linuxmint-ubuntu)
+- [`RcppEigen`](https://stackoverflow.com/questions/39811872/r-fails-to-install-packages-at-load-stage-under-linuxmint-ubuntu)
 
   ```bash
   sudo apt-get install r-base-dev
   ```
-* Hugo for blogdown
+
+- Hugo for blogdown
 
   ```r
   blogdown::install_hugo("0.92.0")
@@ -48,9 +48,10 @@ Just add file `layouts/partials/extend_head.html` with contents:
 
 ```html
 {{ if or .Params.math .Site.Params.math }}
-  <script src="//yihui.org/js/math-code.js"></script>
-  <script async
-    src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+<script src="//yihui.org/js/math-code.js"></script>
+<script
+  async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+></script>
 {{ end }}
 ```

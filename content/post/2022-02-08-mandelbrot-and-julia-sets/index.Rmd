@@ -26,7 +26,7 @@ library(dplyr)
 library(ggplot2)
 library(showtext)
 
-knitr::opts_chunk$set(fig.align = "center", out.width="100%", echo = FALSE)
+knitr::opts_chunk$set(fig.align = "center", out.width = "100%", echo = FALSE)
 
 font_add_google("Merriweather")
 showtext_auto()
@@ -44,16 +44,16 @@ get_animated_fig <- function(name) {
 
 quadratic_map <- function(z_0, c, max_iter = 100L) {
   z <- c(z_0, rep(Inf, max_iter))
-  
+
   for (i in seq_along(z[-1])) {
     if (is.infinite(z[i])) {
       break
     }
-    
-    z[i + 1] = z[i]^2 + c
+
+    z[i + 1] <- z[i]^2 + c
   }
-  
-  tibble(c = c, iter = 0:max_iter, z = z) %>% filter(!is.infinite(z))
+
+  tibble::tibble(c = c, iter = 0:max_iter, z = z) |> filter(!is.infinite(z))
 }
 ```
 
@@ -64,7 +64,7 @@ You can find the code used to generate the post's images and animations in [gith
 ---
 
 Fractals are a beautifully complex -- and I usually do not use these words together -- topic in Mathematics.
-Among many conceptual disagreements between mathematicians, at some point 
+Among many conceptual disagreements between mathematicians, at some point
 [Benoit Mendelbrot](https://en.wikipedia.org/wiki/Benoit_Mandelbrot) proposed a simple and approachable definition:
 
 > A fractal is a shape made of parts similar to the whole in some way.
@@ -133,7 +133,7 @@ On the other hand, for $c = -1$, $z_n$ oscillates between $-1$ and $0$, *i.e.* i
 \end{alignat}
 
 For the boundary $|z| \leq 2$ ($|z| = \sqrt{x^2 + y^2}$, so a circle in the complex plane), the Mandelbrot set looks like Figure \@ref(fig:mandelbrot-bw).
-We are looking at $c$ points for which $|z_n| \leq 2$ for every $n = \{1, 2, 3, \dots, 100\}$ iteration. 
+We are looking at $c$ points for which $|z_n| \leq 2$ for every $n = \{1, 2, 3, \dots, 100\}$ iteration.
 
 ```{r mandelbrot-bw, fig.link=get_static_fig("mandelbrot-bw"), fig.cap="The Mandelbrot set for 100 iterations."}
 knitr::include_graphics(get_static_fig("mandelbrot-bw"))
@@ -143,22 +143,25 @@ It also interesting to see *how many iterations* does it take for $z_n$ to escap
 For $c = -0.8 + 0.5i$ in Figure \@ref(fig:z-escape), $z$ takes $n = 6$ iterations to escape the boundary.
 
 ```{r z-escape, fig.cap="For $c = -0.8+ 0.5i$, $z$ escapes the boundary $|z| \\leq 2$ at the 6th iteration."}
-quadratic_map(0, -.8 + .5i, max_iter = 6L) %>% 
+quadratic_map(0, -.8 + .5i, max_iter = 6L) |>
   ggplot(aes(x = Re(z), y = Im(z))) +
   ggforce::geom_circle(
-    aes(x0 = 0, y0 = 0, r = 2), 
+    aes(x0 = 0, y0 = 0, r = 2),
     fill = "gray80",
     color = "gray80",
     alpha = 0.10,
-    inherit.aes	= FALSE
-    ) +
-  geom_path()  + 
-  geom_label(aes(label = paste0("z[", iter, "]"), color = abs(z) <= 2), 
-             size=9, parse = TRUE) +
+    inherit.aes = FALSE
+  ) +
+  geom_path() +
+  geom_label(aes(label = paste0("z[", iter, "]"), color = abs(z) <= 2),
+    size = 9, parse = TRUE
+  ) +
   coord_equal(x = c(-3, 3), y = c(-3, 3)) +
   theme_light() +
-  theme(legend.position = "none", 
-        text = element_text(family = "Merriweather", size = 28, color = "gray30"))
+  theme(
+    legend.position = "none",
+    text = element_text(family = "Merriweather", size = 28, color = "gray30")
+  )
 ```
 
 If we map this iteration count to the color aesthetic of each point $c$, we get Figure \@ref(fig:mandelbrot-colored).
@@ -228,7 +231,7 @@ Let’s take this opportunity to remember "the most remarkable formula in mathem
 $$
 e^{i x} = \cos x + i \sin x, \quad \text{for any } x \in \mathbb{R}
 $$
-When $x = \pi$, 
+When $x = \pi$,
 
 $$
 e^{i\pi} + 1 = 0

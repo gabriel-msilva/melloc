@@ -1,4 +1,4 @@
-exclude: ^(static/|themes/)
+exclude: ^(layouts/|static/|themes/)
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -17,10 +17,14 @@ repos:
     rev: v0.4.2
     hooks:
       - id: lintr
-      - id: no-print-statement
+        name: Lint R
       - id: style-files
+        name: Format R
+      - id: no-print-statement
+        name: Check print statement
 
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
+        exclude: ^layouts/partials/anchored_headings.html$
