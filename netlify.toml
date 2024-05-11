@@ -1,9 +1,9 @@
 [build]
 command = 'hugo'
 publish = 'public'
+
 [build.environment]
 HUGO_VERSION = '0.92.0'
-
 
 [context]
 [context.branch-deploy]

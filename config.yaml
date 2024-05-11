@@ -1,15 +1,19 @@
 common:
   title: &title "melloc()"
   description: &description |
-      Welcome! 
-      
-      I am Gabriel Mello Silva, currently working as a Machine Learning Engineer.
-      This is my personal blog where I would like to register many things I 
-      learn along the way. Also it is a place where I can write about random-ish 
-      (Data) Science subjects.
+    Welcome!
+
+    I am Gabriel Mello Silva, currently working as a Machine Learning Engineer.
+    This is my personal blog where I would like to register many things I
+    learn along the way. Also it is a place where I can write about random-ish
+    (Data) Science subjects.
 
 theme: "hugo-PaperMod"
 baseURL: "https://gabriel-msilva.github.io/melloc/"
+ignoreFiles:
+  - "\\.Rmd$"
+  - "\\.Rmarkdown$"
+  - "_cache$"
 title: *title
 googleAnalytics: G-P8SCD19EGZ
 
@@ -39,15 +43,15 @@ params:
   displayFullLangName: true
   comments: false
   images: []
-  
+
   cover:
     linkFullImages: true
     hiddenInSingle: true
-    
+
   homeInfoParams:
     Title: *title
     Content: *description
-    
+
   profileMode:
     enabled: false
     title: *title
@@ -61,7 +65,7 @@ params:
         url: archives
       - name: Tags
         url: tags
-      
+
   socialIcons:
     - name: email
       url: "mailto: gabriel.zyx@gmail.com"
@@ -74,7 +78,7 @@ params:
     URL: "https://github.com/gabriel-msilva/melloc"
     Text: "Suggest Changes"
     appendFilePath: false
-  
+
   fuseOpts:
     isCaseSensitive: false
     shouldSort: true

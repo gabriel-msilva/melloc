@@ -1,5 +1,7 @@
-public/
-resources/
+/public/
+/resources/
+
+index.html
 content/post/*/index_files/
 content/**/*.html
 
@@ -14,3 +16,7 @@ content/**/*.html
 .Rproj.user
 .RData
 .Ruserdata
+
+.DS_Store
+Thumbs.db
+.hugo_build.lock
