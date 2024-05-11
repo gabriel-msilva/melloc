@@ -1,6 +1,7 @@
 /public/
 /resources/
 index.html
+README.html
 content/post/*/index_files/
 content/**/*.html
 

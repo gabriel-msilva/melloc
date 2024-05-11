@@ -1,0 +1,11 @@
+// Variables reference: https://code.visualstudio.com/docs/editor/variables-reference
+{
+  "r.rpath.linux": "${workspaceFolder}/.conda/bin/R",
+  "r.rterm.linux": "${workspaceFolder}/.conda/bin/radian",
+  "r.rterm.option": [
+    "--r-binary=${workspaceFolder}/.conda/bin/R",
+    "--no-save",
+    "--no-restore"
+  ],
+  "r.plot.useHttpgd": true
+}
