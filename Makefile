@@ -6,13 +6,13 @@ help: ## Show this help and exit.
 
 .PHONY: setup
 setup: ## Create Conda environment and install pre-commit hooks.
-	mamba env create -p $(CONDA_PREFIX)
-	mamba env update -f environment-dev.yml -p $(CONDA_PREFIX)
-	mamba run -p $(CONDA_PREFIX) Rscript -e 'blogdown::install_hugo(getOption("blogdown.hugo.version"))'
-	mamba run -p $(CONDA_PREFIX) pre-commit install
+	conda env create -p $(CONDA_PREFIX)
+	conda env update -f environment-dev.yml -p $(CONDA_PREFIX)
+	conda run -p $(CONDA_PREFIX) Rscript -e 'blogdown::install_hugo(getOption("blogdown.hugo.version"))'
+	conda run -p $(CONDA_PREFIX) pre-commit install
 
 	@echo "Activate the Conda environment:"
-	@echo "  $$ mamba activate $(CONDA_PREFIX)"
+	@echo "  $$ conda activate $(CONDA_PREFIX)"
 
 .PHONY: build
 build: ## Build site with blogdown.

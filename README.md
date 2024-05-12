@@ -1,50 +1,48 @@
-# melloc() blog
+# melloc()
 
 A personal blog built with R's [blogdown](https://bookdown.org/yihui/blogdown/)
 using a slightly modified [Hugo PaperMod](https://themes.gohugo.io/themes/hugo-papermod/).
 
 Visit the blog page at [**gabriel-msilva.github.io/melloc**](https://gabriel-msilva.github.io/melloc)
 
----
+## Development
 
-### Dependencies
+[Makefile](./Makefile) provides basic commands for development.
 
-Some additional dependencies I needed in order to install all R packages (Pop_OS! 21.10).
-R packages are managed by [renv](https://rstudio.github.io/renv/articles/renv.html).
+```console
+$ make
+build                          Build site with blogdown.
+help                           Show this help and exit.
+serve                          Serve blogdown site.
+setup                          Create Conda environment and install pre-commit hooks.
+```
 
-- `showtext`
+Environment is managed with [Conda](https://docs.anaconda.com/free/miniconda/index.html).
 
-  ```bash
-  sudo apt-get install libcurl4-openssl-dev
-  sudo apt-get install libfreetype6-dev
-  sudo apt-get install libfontconfig1-dev
-  ```
+```sh
+make build
+conda activate ./.venv
+```
 
-- [`png`](https://stackoverflow.com/questions/21800909/cannot-build-r-package-png-fedora-20)
+### Live preview in WSL
 
-  ```bash
-  sudo apt-get install libpng-dev
-  ```
+[`blogdown::serve_site()`](https://pkgs.rstudio.com/blogdown/reference/serve_site.html)
+does not update on file save in local server from WSL to Windows browser.
+If you are using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) with WSLg support,
+you can install a web browser to have a more interactive development experience.
 
-- [`RcppEigen`](https://stackoverflow.com/questions/39811872/r-fails-to-install-packages-at-load-stage-under-linuxmint-ubuntu)
-
-  ```bash
-  sudo apt-get install r-base-dev
-  ```
-
-- Hugo for blogdown
-
-  ```r
-  blogdown::install_hugo("0.92.0")
-  ```
+```sh
+sudo apt-get install firefox
+```
 
 ### Support Math expressions through MathJax
 
 PaperMod does not support Math by default but it is easily implemented.
 Curiously, [PaperMod Math Typesetting](https://adityatelange.github.io/hugo-PaperMod/posts/math-typesetting/)
-did not work, but [bookdown implementation](https://bookdown.org/yihui/blogdown/templates.html#how-to) did just fine.
+did not work, but [bookdown implementation](https://bookdown.org/yihui/blogdown/templates.html#how-to)
+did just fine.
 
-Just add file `layouts/partials/extend_head.html` with contents:
+Just add file [`layouts/partials/extend_head.html`](./layouts/partials/extend_head.html) with contents:
 
 ```html
 {{ if or .Params.math .Site.Params.math }}
