@@ -27,7 +27,6 @@ repos:
     rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
-        exclude: ^layouts/partials/anchored_headings.html$
 
   # Lint: Markdown
   - repo: https://github.com/igorshubovych/markdownlint-cli

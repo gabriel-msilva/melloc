@@ -41,8 +41,6 @@ There are some degrees in which you can try to enforce these standards:
    and, only then, you get to see that, indeed, you forgot to run the linter.
 3. Automatically run the tools before you even commit changes to the local repository.
 
-(It is funny to think how re-emerging situations like that are the reason so many development tools are born)
-
 [Git Hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) is a script that Git executes before or after events such as: commit, push, and receive.
 They are a built-in feature of Git and are useful for enforcing coding standards, running tests, and more.
 
@@ -180,7 +178,8 @@ There are many hooks available for different languages and tools.
 You can find a list of [supported hooks](https://pre-commit.com/hooks.html) in the pre-commit documentation.
 Note that this list is not extensive and you can find more hooks in other repositories.
 
-Check my selection in the next article: [pre-commit: Hooks reference](../2024-05-11-pre-commit-hooks-reference/).
+> Check my selection in the next post:
+> [pre-commit: Hooks reference](../2024-05-11-pre-commit-hooks-reference/).
 
 ### Selecting or ignoring files
 
@@ -329,3 +328,40 @@ from [General](#general) section:
   language: python
   types: [python]
 ```
+
+## Conclusion
+
+> **Don't Use Manual Procedures**
+>
+> People just aren't as repeatable as computers are. Nor should we expect them to be.
+>
+> -- David Thomas and Andrew Hunt, _The Pragmatic Programmer_ (2nd edition, p. 279)
+
+It is funny to think how re-emerging situations like [the one described in the Introduction](#introduction)
+are the reason why so many development tools are born.
+I first tried pre-commit to save time.
+
+- I care a lot about code readability, but formatting takes time.
+  Convincing people why it is important also takes time.
+- Mistypos happen, but sending a code to a CI/CD pipeline to see it fail over a missing bracket takes time.
+- Forgetting takes time, and forgetting minor things repeatably is kind of infuriating, really.
+
+_Time_ is your most precious resource.
+
+The pleasant surprise was to notice that I was also learning from using pre-commit.
+Some rules of code linters are not just over syntax,
+they warn you about a language's pitfall that could create silent bugs.
+Sometimes we get frustrated by someone pointing out every minor mistake, especially by a computer.
+Yet pre-commit hooks make it worth. (free code formatting and review, come on!)
+
+If you strive for quality in your daily work, do not underestimate how much time you can
+end up wasting on seemingly trivial tasks, such as formatting code to improve readability.
+They build up _fast_: "We will automate it later. Now, just click here and here, open this,
+change that, check if... do you want to write it down?".
+Do not overload your mind with such things, you probably have enough going on.
+Use this extra time to think about the real challenges of the project and design good solutions.
+
+To help you get started, the next post is a reference to pre-commit hooks to various languages
+and how to configure them.
+
+Check it out: [pre-commit: Hooks reference](../2024-05-11-pre-commit-hooks-reference/)
