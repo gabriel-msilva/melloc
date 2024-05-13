@@ -9,7 +9,6 @@ repos:
       - id: check-merge-conflict
       - id: check-toml
       - id: end-of-file-fixer
-      - id: requirements-txt-fixer
       - id: trailing-whitespace
 
   # Lint/format: R
@@ -17,7 +16,6 @@ repos:
     rev: v0.4.2
     hooks:
       - id: lintr
-        name: Lint R
       - id: style-files
         name: styler
       - id: no-print-statement

@@ -1,0 +1,331 @@
+---
+title: Git Hooks and pre-commit
+author: Gabriel Mello Silva
+description: Save time and brainpower to enforce code standards.
+summary: |
+  pre-commit is a multi-language package manager for a set of Git hooks.
+  It is a great tool for projects of any size,
+  helping using and sharing hooks that check for code quality.
+date: "2024-04-18"
+archives: "2024"
+cover:
+  image: "cover.png"
+slug: []
+fig_caption: true
+categories:
+  - Programming
+  - Git
+tags:
+  - productivity
+header-includes:
+  - \usepackage{subfig}
+---
+
+## Introduction
+
+Everybody is prone to oversee small mistakes that end up in the source repository.
+Suppose your team decided to use a code linter tool to avoid that in a project you are working on.
+
+You also noticed that formatting code manually is time consuming and usually leads
+to too many subjective arguments over style.
+So, you suggested a code formatter to enforce coding standards in the project.
+
+The challenge about setting standards is that everybody needs to adopt it.
+There are some degrees in which you can try to enforce these standards:
+
+1. Ask developers to run the tools manually before they commit their changes.
+   Spoiler: they (including you) will forget to do it.
+2. Use a Continuous Integration (CI) tool to verify compliance automatically when a pull request is opened.
+   This solves the previous approach, but it is not immediate feedback.
+   You push your changes to the remote repository, wait some minutes for the CI task to run,
+   and, only then, you get to see that, indeed, you forgot to run the linter.
+3. Automatically run the tools before you even commit changes to the local repository.
+
+(It is funny to think how re-emerging situations like that are the reason so many development tools are born)
+
+[Git Hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) is a script that Git executes before or after events such as: commit, push, and receive.
+They are a built-in feature of Git and are useful for enforcing coding standards, running tests, and more.
+
+The [pre-commit](https://pre-commit.com/) tool, as you can imagine, deals with hooks that are triggred before commit events.
+It offers an interface to manage hooks, install them in your local repository, and run them automatically every time you `git commit`.
+
+The most common use case is to run code linting and formatting tools before you commit your changes.
+Not only syntax errors, many linters also detect common pitfalls and bad practices of the language.
+You end up learning from small mistakes.
+
+pre-commit is written in Python and, maybe because of this, I usually see it being used only in Python projects,
+but it can be used with any project that has a _.git_ directory.
+There are many hooks for different languages and tools.
+pre-commit _manages_ them while also offering an easy way to share hooks between projects.
+
+## Installation
+
+You can install pre-commit using `pip` or any other Python package manager.
+
+```sh
+pip install pre-commit
+
+conda install -c conda-forge pre-commit
+```
+
+It is also available in package managers for Linux and macOS.
+
+```sh
+sudo apt-get install pre-commit
+
+brew install pre-commit
+```
+
+## Usage
+
+To start using pre-commit, you need to create a configuration file named _.pre-commit-config.yaml_ in the root of your repository.
+
+```sh
+pre-commit sample-config > .pre-commit-config.yaml
+```
+
+```yaml
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+```
+
+Once you configured your pre-commit hooks (more on that later), you need to install them in your Git repository.
+
+```sh
+pre-commit install
+```
+
+Now every time you commit changes to your repository, pre-commit will run the hooks you defined in the configuration file.
+pre-commit hooks will only run against matching files that are _staged for commit_ (i.e. `git add`).
+When you try to commit those files, pre-commit will run the hooks against them.
+
+```console
+$ git add foo.py config.json
+$ git commit -m "Add foo module"
+[INFO] Initializing environment for https://github.com/pre-commit/pre-commit-hooks.
+[INFO] Installing environment for https://github.com/pre-commit/pre-commit-hooks.
+[INFO] Once installed this environment will be reused.
+[INFO] This may take a few minutes...
+Check Yaml...........................................(no files to check)Skipped
+Fix End of Files.........................................................Passed
+Trim Trailing Whitespace.................................................Failed
+- hook id: trailing-whitespace
+- exit code: 1
+```
+
+pre-commit will create virtual environments for the installed hooks' dependencies, so you don't have to worry about installing them in your system.
+The _Initializing_ and _Installing_ steps are executed only the first time
+you run pre-commit in a repository or on hook updates.
+After that, the hooks are cached in _~/.cache/pre-commit_ and reused.
+You can change the cache location with the `PRE_COMMIT_HOME` environment variable.
+
+Any failing hook will prevent the commit from happening.
+A commit will only succeed if all hooks pass.
+
+If you are implementing pre-commit in an existing repository, you can run the hooks against all files in the repository by running:
+
+```sh
+pre-commit run --all-files
+```
+
+Keep in mind that **hooks are only installed in your local repository**.
+They are not pushed to the remote repository.
+This is because they are specific to your local environment and may not be relevant to other developers.
+Moreover, someone could define malicious hooks buried under _.git/hooks/_ that could compromise the security of the repository.
+So, you must run `pre-commit install` in every new clone of the repository.
+
+You can automatically update versions of all hooks' repositories with a single command.
+
+```sh
+pre-commit autoupdate
+```
+
+To uninstall hooks from your repository:
+
+```sh
+pre-commit uninstall
+```
+
+## Configuration
+
+_The full description of the configuration file can be found in the
+[pre-commit documentation](https://pre-commit.com/#plugins)._
+
+pre-commit hooks in the `.pre-commit-config.yaml` file are a list of _repository mappings_.
+Each repository mapping has the following keys:
+
+- `repo`: URL of the repository that contains the hooks.
+- `rev`: revision or tag of the repository to use.
+- `hooks`: list of hook mappings.
+
+_Hook mappings_ have many configuration options, but the most common are usually:
+
+- `id`: name of the hook (only required key)
+- `files`: regex pattern of files to run on (defaults to `''`, i.e all files)
+- `exclude`: exclude files that were matched by `files` (defaults to `^$`, i.e no files)
+- `args`: list of additional parameters to pass to the hook
+
+pre-commit offers its own collection of hooks (usually quite generic)
+and you can also use hooks from other repositories or create one yourself.
+There are many hooks available for different languages and tools.
+
+You can find a list of [supported hooks](https://pre-commit.com/hooks.html) in the pre-commit documentation.
+Note that this list is not extensive and you can find more hooks in other repositories.
+
+Check my selection in the next article: [pre-commit: Hooks reference](../2024-05-11-pre-commit-hooks-reference/).
+
+### Selecting or ignoring files
+
+You can select or ignore files which the pre-commit will run with the `key` or `exclude` keys in the hook mapping, respectively.
+`key` and `exclude` are a regex patterns matched by [`re.search()`](https://docs.python.org/3/library/re.html#re.search).
+
+A programmatically generated file is often a good candidate for exclusion.
+Suppose you render a `README.md` file from a template `README.md.tpl`.
+Checking for `README.md` format style could be unimportant in this case.
+
+```yaml
+repos:
+  # Ignore a file
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.40.0
+    hooks:
+      - id: markdownlint
+        args: ["--fix"]
+        exclude: ^README.md$
+
+  # Ignore multiple files
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.40.0
+    hooks:
+      - id: markdownlint
+        args: ["--fix"]
+        exclude: ^(README.md|CHANGELOG.md)$
+
+  # Ignore directories
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.40.0
+    hooks:
+      - id: markdownlint
+        args: ["--fix"]
+        exclude: ^src/templates/
+
+  # Ignore file extension
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        exclude: \.md$
+```
+
+You can globally exclude files in [top level](https://pre-commit.com/#pre-commit-configyaml---top-level) of the configuration file.
+
+```yaml
+exclude: ^src/templates/
+
+repos: []
+```
+
+If selecting is easier than excluding, use the `files` parameter.
+
+```yaml
+repos:
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        files: ^(.*\.ya?ml|.*\.json)$
+```
+
+You can also combine both keys.
+In that case, `exclude` tells pre-commit to ignore files selected by `files`.
+
+### CLI arguments
+
+The `args` key in the hook mapping specifies a list of arguments for the hook's command call.
+This allows you to set configurations for the tool used by the hook.
+For example,
+
+```yaml
+repos:
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: stable_version
+    hooks:
+      - id: sqlfluff-lint
+        args: [--dialect, postgres]
+```
+
+Sometimes it is better to configure a hook in `repos[*].hooks[*].args` than creating a new small config file for the specific tool.
+
+## Custom hooks
+
+You can create [repository-local hooks](https://pre-commit.com/#repository-local-hooks) from your own scripts.
+Such hooks are defined as a `local` repository mapping:
+
+```yaml
+repos:
+  - repo: local
+    hooks: []
+```
+
+Here is an example from [_pandas_ repository (v2.2.2)](https://github.com/pandas-dev/pandas/blob/v2.2.2/.pre-commit-config.yaml#L264):
+
+```yaml
+repos:
+  - repo: local
+    hooks:
+      - id: pip-to-conda
+        name: Generate pip dependency from conda
+        language: python
+        entry: python scripts/generate_pip_deps_from_conda.py
+        files: ^(environment.yml|requirements-dev.txt)$
+        pass_filenames: false
+        additional_dependencies: [tomli, pyyaml]
+```
+
+The [script](https://github.com/pandas-dev/pandas/blob/v2.2.2/scripts/generate_pip_deps_from_conda.py)
+generates a [_requirements-dev.txt_](https://github.com/pandas-dev/pandas/blob/v2.2.2/requirements-dev.txt) (pip) file
+from dependencies in [_environment.yml_](https://github.com/pandas-dev/pandas/blob/v2.2.2/environment.yml) (Conda).
+If there are changes to the **staged** _requirements-dev.txt_ after running the script, then pre-commit fails.
+
+It would be easy to forget to manually update
+-- and by "manually" I mean "running the script"--
+_requirements-dev.txt_ every time there is an update to _environment.yml_.
+A good oportunnity to add a pre-commit hook and never worry again.
+
+There are many possible configurations for repository-local hooks, such as
+[language support](https://pre-commit.com/#repository-local-hooks).
+See [Creating new hooks](https://pre-commit.com/#creating-new-hooks) for the full description.
+
+If you find that your hooks may be useful in other projects,
+you can create a _.pre-commit-hooks.yaml_ file containing a list of hook mappings to share.
+Now pre-commit knows how to install hooks from your repository.
+
+This is how the hooks I used over the post are defined.
+For example, in [github.com/pre-commit/pre-commit-hooks (v4.6.0)](https://github.com/pre-commit/pre-commit-hooks/blob/v4.6.0/.pre-commit-hooks.yaml)
+from [General](#general) section:
+
+```yaml
+# .pre-commit-hooks.yaml (redacted)
+
+- id: check-added-large-files
+  name: check for added large files
+  description: prevents giant files from being committed.
+  entry: check-added-large-files
+  language: python
+  stages: [commit, push, manual]
+
+- id: check-ast
+  name: check python ast
+  description: simply checks whether the files parse as valid python.
+  entry: check-ast
+  language: python
+  types: [python]
+```
