@@ -16,6 +16,7 @@ repos:
     rev: v0.4.2
     hooks:
       - id: lintr
+        additional_dependencies: ["R.cache"]
       - id: style-files
         name: styler
       - id: no-print-statement

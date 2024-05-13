@@ -1,4 +1,4 @@
-name: Build site
+name: Test/Build/Deploy
 
 on:
   push:
@@ -32,17 +32,30 @@ jobs:
         with:
           lfs: true
 
+      - uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-file: environment.yml
+          cache-environment: true
+          cache-downloads: true
+
+      - name: Install Hugo
+        shell: bash -el {0}
+        run: Rscript -e 'blogdown::install_hugo(getOption("blogdown.hugo.version"))'
+
       - name: Build site
-        uses: ./.github/actions/build-site
+        shell: bash -el {0}
+        run: Rscript -e 'blogdown::build_site(build_rmd = TRUE)'
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           name: melloc
           path: public/
 
   deploy:
     needs: [build]
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-20.04
     environment:
       name: github-pages
