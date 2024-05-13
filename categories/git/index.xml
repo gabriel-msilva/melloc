@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>productivity on melloc()</title>
-    <link>https://gabriel-msilva.github.io/melloc/tags/productivity/</link>
-    <description>Recent content in productivity on melloc()</description>
+    <title>Git on melloc()</title>
+    <link>https://gabriel-msilva.github.io/melloc/categories/git/</link>
+    <description>Recent content in Git on melloc()</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 11 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://gabriel-msilva.github.io/melloc/tags/productivity/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://gabriel-msilva.github.io/melloc/categories/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>pre-commit: Hooks reference</title>
       <link>https://gabriel-msilva.github.io/melloc/post/2024-05-11-pre-commit-hooks-reference/</link>
@@ -22,15 +22,6 @@
       
       <guid>https://gabriel-msilva.github.io/melloc/post/2024-04-18-git-hooks-and-pre-commit/</guid>
       <description>Save time and brainpower to enforce code standards.</description>
-    </item>
-    
-    <item>
-      <title>Productivity and IPython for Data Science</title>
-      <link>https://gabriel-msilva.github.io/melloc/post/2023-03-12-vscode-ipython-setup/</link>
-      <pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://gabriel-msilva.github.io/melloc/post/2023-03-12-vscode-ipython-setup/</guid>
-      <description>Set up an interactive Python environment for development in Visual Studio Code</description>
     </item>
     
   </channel>

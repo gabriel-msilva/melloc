@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>pre-commit: Hooks reference | melloc()</title>
+<meta name="keywords" content="productivity" />
+<meta name="description" content="A reference guide to pre-commit hooks">
+<meta name="author" content="Gabriel Mello Silva">
+<link rel="canonical" href="https://gabriel-msilva.github.io/melloc/post/2024-05-11-pre-commit-hooks-reference/" />
+<link crossorigin="anonymous" href="/melloc/assets/css/stylesheet.min.999587bda3ad1b7934c8e7230c140a314ba9db81de48b3b49bc76e35ee73581b.css" integrity="sha256-mZWHvaOtG3k0yOcjDBQKMUup24HeSLO0m8duNe5zWBs=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/melloc/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://gabriel-msilva.github.io/melloc/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://gabriel-msilva.github.io/melloc/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://gabriel-msilva.github.io/melloc/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://gabriel-msilva.github.io/melloc/apple-touch-icon.png">
+<link rel="mask-icon" href="https://gabriel-msilva.github.io/melloc/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.92.0" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script src="//yihui.org/js/math-code.js"></script>
+<script
+  async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P8SCD19EGZ"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-P8SCD19EGZ', { 'anonymize_ip': false });
+}
+</script>
+<meta property="og:title" content="pre-commit: Hooks reference" />
+<meta property="og:description" content="A reference guide to pre-commit hooks" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://gabriel-msilva.github.io/melloc/post/2024-05-11-pre-commit-hooks-reference/" />
+<meta property="og:image" content="https://gabriel-msilva.github.io/melloc/cover.png" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-05-11T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2024-05-11T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://gabriel-msilva.github.io/melloc/cover.png" />
+<meta name="twitter:title" content="pre-commit: Hooks reference"/>
+<meta name="twitter:description" content="A reference guide to pre-commit hooks"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://gabriel-msilva.github.io/melloc/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "pre-commit: Hooks reference",
+      "item": "https://gabriel-msilva.github.io/melloc/post/2024-05-11-pre-commit-hooks-reference/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "pre-commit: Hooks reference",
+  "name": "pre-commit: Hooks reference",
+  "description": "A reference guide to pre-commit hooks",
+  "keywords": [
+    "productivity"
+  ],
+  "articleBody": " If you not familiar with pre-commit, check the previous article: Git hooks and pre-commit.\n I always find myself consulting documentation to remember how to configure tools, so this is a compiled reference of pre-commit hooks I use most.\nEach section contains hooks for a language, or a set of languages. The first code block always shows the repository and hook mappings in the .pre-commit-config.yaml file. A baseline for configuration of the hook or tool is also given. Refer to the linked documentations for fine-tuning to your needs.\nAs sometimes rules do not apply or they are false positives, every code linter has a way to ignore rules. Usually it can be done in the command line, in the configuration file, or in code itself. These options are illustrated in each section, when applicable.\nGeneral pre-commit has its own set of hooks that are quite generic and can be used in any project. Details about each hook can be found in the pre-commit-hooks repository.\nrepos: - repo: https://github.com/pre-commit/pre-commit-hooks rev: v3.2.0 hooks: - id: check-added-large-files args: [\"--maxkb=512\"] - id: check-merge-conflict - id: check-toml - id: end-of-file-fixer - id: requirements-txt-fixer - id: trailing-whitespace Python ruff Ruff really impressed me as an all-in-one code formatter and linter for Python. It wraps a lot of tools and extensions in a single place and is faster (it is written in Rust, actually).\nRuff also has an extension for VS Code.\n Astral, the developers of Ruff, are coming up with several promising tools for the Python ecosystem. I recommend checking out rye, a project and package manager.\n repos: # Format/lint: Python - repo: https://github.com/astral-sh/ruff-pre-commit rev: v0.4.2 hooks: - id: ruff args: [--fix] - id: ruff-format Ruff can be configured through a pyproject.toml, ruff.toml, or .ruff.toml file. See Configurating Ruff for the default configuration and Settings for a comprehensive list of configuration options.\n# pyproject.toml [tool.ruff] target-version = \"py310\" [tool.ruff.lint] select = [ \"E4\", \"E7\", \"E9\", # pycodestyle \"F\", # Pyflakes \"I\", # isort \"A\", # flake8-builtins \"B\", # flake8-bugbear \"SIM\", # flake8-simplify ] unfixable = [\"F401\"] The inline ignore syntax is:\n# Ignore rule F841 x = 0 # noqa: F841 # Ignore rules E741 and F841 i = 1 # noqa: E741, F841 # Ignore _all_ violations j = 2 # noqa The syntax applies to flake8 (see below).\nblack + flake8 + isort  I highly recommend using Ruff instead of these because it wraps so much in a single tool (and configuration file).\n The canonical code formatter and linter tools for Python.\n black: code formatter flake8: code linter isort: sort Python imports  repos: # Format: Python - repo: https://github.com/psf/black rev: 24.4.2 hooks: - id: black # Lint: Python - repo: https://github.com/PyCQA/flake8 rev: 7.0.0 hooks: - id: flake8 # Format: Python imports - repo: https://github.com/PyCQA/isort rev: 5.13.2 hooks: - id: isort Configuration is more troublesome, because you have to look for options in a bunch of different documentations and may be a lot of tweaking between tools. That is why I am enjoying Ruff so much. But here is a sample configuration:\n# pyproject.toml [tool.black] target-version = [\"py310\"] line-length = 88 include = '\\.pyi?$' extend-exclude = ''' /( \\.bzr |\\.git-rewrite |\\.pants.d |\\.pyenv |\\.pytype |buck-out |node_modules |site-packages )/ ''' [tool.isort] profile = \"black\" line_length = 88 multi_line_output = 3 include_trailing_comma = true virtual_env = \"venv\" # .flake8 (flake8 does not support pyproject.toml) [flake8] extend-exclude =.bzr, .git-rewrite, .pants.d, .pyenv, .pytype, buck-out, node_modules, site-packages extend-ignore =\"E501\", # Line too long \"W503\", # Line break occurred before binary operator \"E226\", # Missing white space around arithmetic operator R Code lint and formatting are powered by lintr and styler, respectively.\n lintr: code lint style-files: code formatting no-print-statement: Check if a R file contains a print() statement  repos: # Format/lint: R - repo: https://github.com/lorenzwalthert/precommit rev: v0.4.2 hooks: - id: lintr name: Lint R - id: style-files name: Format R - id: no-print-statement name: Check print statement The repository includes other useful hooks directed at packages like roxygen2 and pkgdown.\nYou may configure lintr with the .lintr file. See Configuring linters and Available linters for more configuration options.\n# .lintr linters: linters_with_defaults( line_length_linter(120), commented_code_linter = NULL ) The inline ignore syntax is:\n  Ignore current line:\n# Ignore line ignore( this) # styler: off f( ) # not ignored anymore   Ignore code block:\nblibala= 3 # styler: off I_have(good+reasons, to = turn_off, styler ) # styler: on 1+1   SQL SQLFluff is a code linter and formatter for several dialects of SQL. It helps detecting bad practices and inneficiencies in your query, besides auto-formatting your code. Great tool for refactoring prototype or legacy code.\nrepos: - repo: https://github.com/sqlfluff/sqlfluff rev: stable_version hooks: - id: sqlfluff-lint args: [--dialect, postgres] - id: sqlfluff-fix args: [--dialect, postgres] SQLFluff support several configuration files, such as .sqlfluff and pyproject.toml. Check the Default Configuration and Rule index for full reference.\n# pyproject.toml [tool.sqlfluff.core] templater = \"jinja\" sql_file_exts = \".sql,.sql.j2,.sql.jinja2\" [tool.sqlfluff.indentation] indented_joins = false indented_using_on = true template_blocks_indent = false [tool.sqlfluff.templater] unwrap_wrapped_queries = true [tool.sqlfluff.templater.jinja] apply_dbt_builtins = false # For rule specific configuration, use dots between the names exactly # as you would in .sqlfluff. In the background, SQLFluff will unpack the # configuration paths accordingly. [tool.sqlfluff.rules.capitalisation.keywords] capitalisation_policy = \"upper\" The inline ignore syntax is:\n  Ignore current line:\n-- Ignore one or more rules SELECT a.a*a.b AS bad_1, -- noqa: LT01  a.a * a.b AS bad_2, -- noqa: LT01, LT03 FROM my_table   Ignore code block:\n-- Ignore rule AL02 from this line forward SELECT col_a a FROM foo -- noqa: disable=AL02  -- Ignore all rules from this line forward SELECT col_a a FROM foo -- noqa: disable=all  -- Enforce all rules from this line forward SELECT col_a a FROM foo -- noqa: enable=all   Webdev, YAML, JSON, and more Prettier is a code formatter devoted to front-end langages like JavaScript, TypeScript, HTML and many more, but it also has plugins for other languages. As you may be using only a subset of its supported languages, limiting which files Prettier will run on can improve performance.\nPrettier is a good choice for YAML, JSON and Markdown files. In the configuration below, I only select files with extension .ymal, .yml, .json, and .md.\nrepos: # Format: YAML, JSON and Markdown - repo: https://github.com/pre-commit/mirrors-prettier rev: v4.0.0-alpha.8 hooks: - id: prettier files: ^(.*\\.ya?ml|.*\\.json|.*\\.md)$ There are several configuration files names, I will use .prettierrc.yaml here. See Configuration file for more options.\n# .prettierrc.yaml tabWidth: 2 endOfLine: lf YAML In addition to Prettier, yamllint provides a code linter for YAML files.\nrepos: # Lint: YAML - repo: https://github.com/adrienverge/yamllint rev: v1.35.1 hooks: - id: yamllint args: [\"-d {extends: relaxed, rules: {line-length: disable}}\", \"-s\"] files: \\.(yaml|yml)$ The inline ignore syntax is:\n  Disable one or more rules in a line:\n# yamllint disable-line rule:line-length disable-rule: This line is waaaaaaaaaay too long but yamllint will not report anything about it # yamllint disable-line rule:hyphens rule:commas disable-rules: [hyphens, commas] # yamllint disable-line disable-all: Disable _all_ rules (not recommended)   Disable one or more rules in a code block:\ndisable-rules: # yamllint disable rule:colons - Lorem : ipsum dolor : sit amet, consectetur : adipiscing elit # yamllint enable rule:colons disable-all: # yamllint disable - Lorem : ipsum: dolor : [ sit,amet] - consectetur : adipiscing elit # yamllint enable   Markdown In addition to Prettier, markdownlint-cli provides a code linter for Markdown files.\nrepos: # Lint: Markdown - repo: https://github.com/igorshubovych/markdownlint-cli rev: v0.40.0 hooks: - id: markdownlint args: [\"--fix\"] Configuration can be set in a .markdownlint.yaml file. The configuration below addresses a common issue with tables: it lets them be as long as they need to. See Rules for a description of all rules.\n# .markdownlint.yaml # Default state for all rules default: true # MD013/line-length - Line length MD013: line_length: 100 tables: false The inline ignore syntax is:\nDisable one or more rules for the current line.   Disable/enable one or more rules in a block. - MD001: heading-increment * MD005: list-indent   Disable/enable _all_ rules in a block.  Shell and Bash Shell and bash scripts are pretty common in many projects.\n shellcheck-py: builds on top of ShellCheck, a shell script linter. Rules for ShellCheck can be found in the Wiki pages bashate: a linter for bash scripts, complementing ShellCheck. See rules in Currently Supported Checks.  repos: # Lint: Shell scripts - repo: https://github.com/shellcheck-py/shellcheck-py rev: v0.10.0.1 hooks: - id: shellcheck args: [\"-x\"] # Lint: Bash scripts - repo: https://github.com/openstack/bashate rev: 2.1.1 hooks: - id: bashate ShellCheck may be configured in the .shellcheckrc file.\n# .shellcheckrc # Don't suggest [ -n \"$VAR\" ] over [ ! -z \"$VAR\" ] disable=SC2236 # Suggest ${VAR} in place of $VAR enable=require-variable-braces The inline ignore syntax is:\n  Disable one or more rules in a line:\n#!/bin/sh  source $(dirname \"$0/utils.sh\") # shellcheck disable=SC2059,SC2034 echo \"Disable rules SC2059 and SC2034 for this line\" # shellcheck disable=all echo \"Disable all rules for this line\"   Disable all rules in a file:\n#!/bin/sh # shellcheck disable=SC2059,SC2034 source $(dirname \"$0/utils.sh\") echo \"Disable rules SC2059 and SC2034 in the entire file.\" echo \"Must be at the top of the file\"   Docker Hadolint helps a lot in improving the stability of Docker images as well as reducing their overall size.\nrepos: # Lint: Dockerfile - repo: https://github.com/hadolint/hadolint rev: v2.12.0 hooks: - id: hadolint Configuration may be done in a .hadolint.yaml file. You can find the list of Rules in the repository.\n# .hadolint.yaml ignored: - DL3008 # Pin versions in `apt-get install` The inline ignore syntax is:\n Ignore one or more rules in a file:  # hadolint global ignore=DL3003,DL3006,SC1035FROMubuntu:22.04RUN echo \"global\" Ignore one or more rules in a line:  # hadolint ignore=DL3006FROMubuntu# hadolint ignore=DL3003,SC1035RUN echo \"line\"",
+  "wordCount" : "1605",
+  "inLanguage": "en",
+  "image":"https://gabriel-msilva.github.io/melloc/cover.png","datePublished": "2024-05-11T00:00:00Z",
+  "dateModified": "2024-05-11T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Gabriel Mello Silva"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://gabriel-msilva.github.io/melloc/post/2024-05-11-pre-commit-hooks-reference/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "melloc()",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://gabriel-msilva.github.io/melloc/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://gabriel-msilva.github.io/melloc/" accesskey="h" title="melloc() (Alt + H)">melloc()</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://gabriel-msilva.github.io/melloc/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://gabriel-msilva.github.io/melloc/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://gabriel-msilva.github.io/melloc/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://gabriel-msilva.github.io/melloc/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://gabriel-msilva.github.io/melloc/">Home</a>&nbsp;»&nbsp;<a href="https://gabriel-msilva.github.io/melloc/post/">Posts</a></div>
+    <h1 class="post-title">
+      pre-commit: Hooks reference
+    </h1>
+    <div class="post-description">
+      A reference guide to pre-commit hooks
+    </div>
+    <div class="post-meta"><span title='2024-05-11 00:00:00 +0000 UTC'>2024-05-11</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Gabriel Mello Silva&nbsp;|&nbsp;<a href="https://github.com/gabriel-msilva/melloc" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#" aria-label="General">General</a></li>
+                <li>
+                    <a href="#" aria-label="Python">Python</a><ul>
+                        
+                <li>
+                    <a href="#" aria-label="ruff">ruff</a></li>
+                <li>
+                    <a href="#" aria-label="black &#43; flake8 &#43; isort">black + flake8 + isort</a></li></ul>
+                </li>
+                <li>
+                    <a href="#" aria-label="R">R</a></li>
+                <li>
+                    <a href="#" aria-label="SQL">SQL</a></li>
+                <li>
+                    <a href="#" aria-label="Webdev, YAML, JSON, and more">Webdev, YAML, JSON, and more</a></li>
+                <li>
+                    <a href="#" aria-label="YAML">YAML</a></li>
+                <li>
+                    <a href="#" aria-label="Markdown">Markdown</a></li>
+                <li>
+                    <a href="#" aria-label="Shell and Bash">Shell and Bash</a></li>
+                <li>
+                    <a href="#" aria-label="Docker">Docker</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><blockquote>
+<p>If you not familiar with pre-commit, check the previous article:
+<a href="./../2024-04-18-git-hooks-and-pre-commit/">Git hooks and pre-commit</a>.</p>
+</blockquote>
+<p>I always find myself consulting documentation to remember how to configure tools,
+so this is a compiled reference of <a href="https://pre-commit.com">pre-commit</a> hooks I use most.</p>
+<p>Each section contains hooks for a language, or a set of languages.
+The first code block always shows the repository and hook mappings in the
+<em>.pre-commit-config.yaml</em> file.
+A baseline for configuration of the hook or tool is also given.
+Refer to the linked documentations for fine-tuning to your needs.</p>
+<p>As sometimes rules do not apply or they are false positives, every code linter has a way to ignore rules.
+Usually it can be done in the command line, in the configuration file, or in code itself.
+These options are illustrated in each section, when applicable.</p>
+<h2 id="general">General</h2>
+<p>pre-commit has its own set of hooks that are quite generic and can be used in any project.
+Details about each hook can be found in the <a href="https://github.com/pre-commit/pre-commit-hooks?tab=readme-ov-file#hooks-available"><em>pre-commit-hooks</em> repository</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">repos</span>:
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/pre-commit/pre-commit-hooks</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">v3.2.0</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">check-added-large-files</span>
+        <span style="color:#f92672">args</span>: [<span style="color:#e6db74">&#34;--maxkb=512&#34;</span>]
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">check-merge-conflict</span>
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">check-toml</span>
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">end-of-file-fixer</span>
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">requirements-txt-fixer</span>
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">trailing-whitespace</span>
+</code></pre></div><h2 id="python">Python</h2>
+<h3 id="ruff">ruff</h3>
+<p>Ruff really impressed me as an all-in-one code formatter and linter for Python.
+It wraps a lot of tools and extensions in a single place and is faster
+(it is written in Rust, actually).</p>
+<p>Ruff also has an <a href="https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff">extension for VS Code</a>.</p>
+<blockquote>
+<p><a href="https://github.com/astral-sh">Astral</a>, the developers of Ruff,
+are coming up with several promising tools for the Python ecosystem.
+I recommend checking out <a href="https://rye-up.com/">rye</a>, a project and package manager.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">repos</span>:
+  <span style="color:#75715e"># Format/lint: Python</span>
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/astral-sh/ruff-pre-commit</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">v0.4.2</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">ruff</span>
+        <span style="color:#f92672">args</span>: [--<span style="color:#ae81ff">fix]</span>
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">ruff-format</span>
+</code></pre></div><p>Ruff can be configured through a <em>pyproject.toml</em>, <em>ruff.toml</em>, or <em>.ruff.toml</em> file.
+See <a href="https://docs.astral.sh/ruff/configuration/">Configurating Ruff</a> for the default configuration
+and <a href="https://docs.astral.sh/ruff/settings/">Settings</a> for a comprehensive list of configuration options.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#75715e"># pyproject.toml</span>
+
+[<span style="color:#a6e22e">tool</span>.<span style="color:#a6e22e">ruff</span>]
+<span style="color:#a6e22e">target-version</span> = <span style="color:#e6db74">&#34;py310&#34;</span>
+
+[<span style="color:#a6e22e">tool</span>.<span style="color:#a6e22e">ruff</span>.<span style="color:#a6e22e">lint</span>]
+<span style="color:#a6e22e">select</span> = [
+  <span style="color:#e6db74">&#34;E4&#34;</span>, <span style="color:#e6db74">&#34;E7&#34;</span>, <span style="color:#e6db74">&#34;E9&#34;</span>, <span style="color:#75715e"># pycodestyle</span>
+  <span style="color:#e6db74">&#34;F&#34;</span>,              <span style="color:#75715e"># Pyflakes</span>
+  <span style="color:#e6db74">&#34;I&#34;</span>,              <span style="color:#75715e"># isort</span>
+  <span style="color:#e6db74">&#34;A&#34;</span>,              <span style="color:#75715e"># flake8-builtins</span>
+  <span style="color:#e6db74">&#34;B&#34;</span>,              <span style="color:#75715e"># flake8-bugbear</span>
+  <span style="color:#e6db74">&#34;SIM&#34;</span>,            <span style="color:#75715e"># flake8-simplify</span>
+]
+<span style="color:#a6e22e">unfixable</span> = [<span style="color:#e6db74">&#34;F401&#34;</span>]
+</code></pre></div><p>The <a href="https://flake8.pycqa.org/en/3.1.1/user/ignoring-errors.html#in-line-ignoring-errors">inline ignore syntax</a>
+is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#&gt; Ignore rule F841</span>
+x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># noqa: F841</span>
+
+<span style="color:#75715e">#&gt; Ignore rules E741 and F841</span>
+i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>  <span style="color:#75715e"># noqa: E741, F841</span>
+
+<span style="color:#75715e">#&gt; Ignore _all_ violations</span>
+j <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>  <span style="color:#75715e"># noqa</span>
+</code></pre></div><p>The syntax applies to <code>flake8</code> (see below).</p>
+<h3 id="black--flake8--isort">black + flake8 + isort</h3>
+<blockquote>
+<p>I highly recommend using <a href="#ruff">Ruff</a> instead of these because it wraps so much in
+a single tool (and configuration file).</p>
+</blockquote>
+<p>The canonical code formatter and linter tools for Python.</p>
+<ul>
+<li><code>black</code>: code formatter</li>
+<li><code>flake8</code>: code linter</li>
+<li><code>isort</code>: sort Python imports</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">repos</span>:
+  <span style="color:#75715e"># Format: Python</span>
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/psf/black</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">24.4.2</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">black</span>
+
+  <span style="color:#75715e"># Lint: Python</span>
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/PyCQA/flake8</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">7.0.0</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">flake8</span>
+
+  <span style="color:#75715e"># Format: Python imports</span>
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/PyCQA/isort</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">5.13.2</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">isort</span>
+</code></pre></div><p>Configuration is more troublesome, because you have to look for options in a bunch of
+different documentations and may be a lot of tweaking between tools.
+That is why I am enjoying Ruff so much.
+But here is a sample configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#75715e"># pyproject.toml</span>
+
+[<span style="color:#a6e22e">tool</span>.<span style="color:#a6e22e">black</span>]
+<span style="color:#a6e22e">target-version</span> = [<span style="color:#e6db74">&#34;py310&#34;</span>]
+<span style="color:#a6e22e">line-length</span> = <span style="color:#ae81ff">88</span>
+<span style="color:#a6e22e">include</span> = <span style="color:#e6db74">&#39;\.pyi?$&#39;</span>
+<span style="color:#a6e22e">extend-exclude</span> = <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">/(
+</span><span style="color:#e6db74">    \.bzr
+</span><span style="color:#e6db74">  |\.git-rewrite
+</span><span style="color:#e6db74">  |\.pants.d
+</span><span style="color:#e6db74">  |\.pyenv
+</span><span style="color:#e6db74">  |\.pytype
+</span><span style="color:#e6db74">  |buck-out
+</span><span style="color:#e6db74">  |node_modules
+</span><span style="color:#e6db74">  |site-packages
+</span><span style="color:#e6db74">)/
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+
+[<span style="color:#a6e22e">tool</span>.<span style="color:#a6e22e">isort</span>]
+<span style="color:#a6e22e">profile</span> = <span style="color:#e6db74">&#34;black&#34;</span>
+<span style="color:#a6e22e">line_length</span> = <span style="color:#ae81ff">88</span>
+<span style="color:#a6e22e">multi_line_output</span> = <span style="color:#ae81ff">3</span>
+<span style="color:#a6e22e">include_trailing_comma</span> = <span style="color:#66d9ef">true</span>
+<span style="color:#a6e22e">virtual_env</span> = <span style="color:#e6db74">&#34;venv&#34;</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#75715e"># .flake8 (flake8 does not support pyproject.toml)</span>
+
+<span style="color:#66d9ef">[flake8]</span>
+<span style="color:#a6e22e">extend-exclude</span> <span style="color:#f92672">=</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">  .bzr,
+</span><span style="color:#e6db74">  .git-rewrite,
+</span><span style="color:#e6db74">  .pants.d,
+</span><span style="color:#e6db74">  .pyenv,
+</span><span style="color:#e6db74">  .pytype,
+</span><span style="color:#e6db74">  buck-out,
+</span><span style="color:#e6db74">  node_modules,
+</span><span style="color:#e6db74">  site-packages</span>
+<span style="color:#a6e22e">extend-ignore</span> <span style="color:#f92672">=</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">  &#34;E501&#34;, # Line too long
+</span><span style="color:#e6db74">  &#34;W503&#34;, # Line break occurred before binary operator
+</span><span style="color:#e6db74">  &#34;E226&#34;, # Missing white space around arithmetic operator</span>
+</code></pre></div><h2 id="r">R</h2>
+<p>Code lint and formatting are powered by <a href="https://lintr.r-lib.org/index.html"><code>lintr</code></a>
+and <a href="https://styler.r-lib.org/index.html"><code>styler</code></a>, respectively.</p>
+<ul>
+<li><code>lintr</code>: code lint</li>
+<li><code>style-files</code>: code formatting</li>
+<li><code>no-print-statement</code>: Check if a R file contains a <code>print()</code> statement</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">repos</span>:
+  <span style="color:#75715e"># Format/lint: R</span>
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/lorenzwalthert/precommit</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">v0.4.2</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">lintr</span>
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Lint R</span>
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">style-files</span>
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Format R</span>
+      - <span style="color:#f92672">id</span>: <span style="color:#66d9ef">no</span>-<span style="color:#ae81ff">print-statement</span>
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Check print statement</span>
+</code></pre></div><p>The repository includes <a href="https://github.com/lorenzwalthert/precommit/blob/main/.pre-commit-hooks.yaml">other useful hooks</a>
+directed at packages like <code>roxygen2</code> and <code>pkgdown</code>.</p>
+<p>You may configure <code>lintr</code> with the <em>.lintr</em> file.
+See <a href="https://lintr.r-lib.org/articles/lintr.html#configuring-linters">Configuring linters</a>
+and <a href="https://lintr.r-lib.org/reference/linters.html">Available linters</a>
+for more configuration options.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#75715e"># .lintr</span>
+
+linters<span style="color:#f92672">:</span> <span style="color:#a6e22e">linters_with_defaults</span>(
+    <span style="color:#a6e22e">line_length_linter</span>(<span style="color:#ae81ff">120</span>),
+    commented_code_linter <span style="color:#f92672">=</span> <span style="color:#66d9ef">NULL</span>
+  )
+</code></pre></div><p>The <a href="https://styler.r-lib.org/articles/styler.html#ignoring-certain-lines">inline ignore syntax</a> is:</p>
+<ul>
+<li>
+<p>Ignore current line:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#75715e">#&gt; Ignore line</span>
+<span style="color:#a6e22e">ignore</span>( this) <span style="color:#75715e"># styler: off</span>
+<span style="color:#a6e22e">f</span>( ) <span style="color:#75715e"># not ignored anymore</span>
+</code></pre></div></li>
+<li>
+<p>Ignore code block:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">blibala<span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+
+<span style="color:#75715e"># styler: off</span>
+<span style="color:#a6e22e">I_have</span>(good<span style="color:#f92672">+</span>reasons, to <span style="color:#f92672">=</span> turn_off,
+styler
+)
+<span style="color:#75715e"># styler: on</span>
+
+<span style="color:#ae81ff">1+1</span>
+</code></pre></div></li>
+</ul>
+<h2 id="sql">SQL</h2>
+<p><a href="https://docs.sqlfluff.com/en/stable/">SQLFluff</a> is a code linter and formatter for
+several dialects of SQL.
+It helps detecting bad practices and <em>inneficiencies</em> in your query,
+besides auto-formatting your code.
+Great tool for refactoring prototype or legacy code.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">repos</span>:
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/sqlfluff/sqlfluff</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">stable_version</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">sqlfluff-lint</span>
+        <span style="color:#f92672">args</span>: [--<span style="color:#ae81ff">dialect, postgres]</span>
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">sqlfluff-fix</span>
+        <span style="color:#f92672">args</span>: [--<span style="color:#ae81ff">dialect, postgres]</span>
+</code></pre></div><p>SQLFluff support several <a href="https://docs.sqlfluff.com/en/stable/configuration.html#configuration-files">configuration files</a>,
+such as <em>.sqlfluff</em> and <em>pyproject.toml</em>.
+Check the <a href="https://docs.sqlfluff.com/en/stable/configuration.html#default-configuration">Default Configuration</a>
+and <a href="https://docs.sqlfluff.com/en/stable/rules.html#rule-index">Rule index</a> for full reference.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#75715e"># pyproject.toml</span>
+
+[<span style="color:#a6e22e">tool</span>.<span style="color:#a6e22e">sqlfluff</span>.<span style="color:#a6e22e">core</span>]
+<span style="color:#a6e22e">templater</span> = <span style="color:#e6db74">&#34;jinja&#34;</span>
+<span style="color:#a6e22e">sql_file_exts</span> = <span style="color:#e6db74">&#34;.sql,.sql.j2,.sql.jinja2&#34;</span>
+
+[<span style="color:#a6e22e">tool</span>.<span style="color:#a6e22e">sqlfluff</span>.<span style="color:#a6e22e">indentation</span>]
+<span style="color:#a6e22e">indented_joins</span> = <span style="color:#66d9ef">false</span>
+<span style="color:#a6e22e">indented_using_on</span> = <span style="color:#66d9ef">true</span>
+<span style="color:#a6e22e">template_blocks_indent</span> = <span style="color:#66d9ef">false</span>
+
+[<span style="color:#a6e22e">tool</span>.<span style="color:#a6e22e">sqlfluff</span>.<span style="color:#a6e22e">templater</span>]
+<span style="color:#a6e22e">unwrap_wrapped_queries</span> = <span style="color:#66d9ef">true</span>
+
+[<span style="color:#a6e22e">tool</span>.<span style="color:#a6e22e">sqlfluff</span>.<span style="color:#a6e22e">templater</span>.<span style="color:#a6e22e">jinja</span>]
+<span style="color:#a6e22e">apply_dbt_builtins</span> = <span style="color:#66d9ef">false</span>
+
+<span style="color:#75715e"># For rule specific configuration, use dots between the names exactly</span>
+<span style="color:#75715e"># as you would in .sqlfluff. In the background, SQLFluff will unpack the</span>
+<span style="color:#75715e"># configuration paths accordingly.</span>
+[<span style="color:#a6e22e">tool</span>.<span style="color:#a6e22e">sqlfluff</span>.<span style="color:#a6e22e">rules</span>.<span style="color:#a6e22e">capitalisation</span>.<span style="color:#a6e22e">keywords</span>]
+<span style="color:#a6e22e">capitalisation_policy</span> = <span style="color:#e6db74">&#34;upper&#34;</span>
+</code></pre></div><p>The <a href="https://docs.sqlfluff.com/en/stable/rules.html#inline-ignoring-errors">inline ignore syntax</a> is:</p>
+<ul>
+<li>
+<p>Ignore current line:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- Ignore one or more rules
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span>
+  a.a<span style="color:#f92672">*</span>a.b <span style="color:#66d9ef">AS</span> bad_1,  <span style="color:#75715e">-- noqa: LT01
+</span><span style="color:#75715e"></span>  a.a <span style="color:#f92672">*</span>  a.b <span style="color:#66d9ef">AS</span> bad_2,  <span style="color:#75715e">-- noqa: LT01, LT03
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">FROM</span> my_table
+</code></pre></div></li>
+<li>
+<p>Ignore code block:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- Ignore rule AL02 from this line forward
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> col_a a <span style="color:#66d9ef">FROM</span> foo <span style="color:#75715e">-- noqa: disable=AL02
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">-- Ignore all rules from this line forward
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> col_a a <span style="color:#66d9ef">FROM</span> foo <span style="color:#75715e">-- noqa: disable=all
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">-- Enforce all rules from this line forward
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> col_a a <span style="color:#66d9ef">FROM</span> foo <span style="color:#75715e">-- noqa: enable=all
+</span></code></pre></div></li>
+</ul>
+<h2 id="webdev-yaml-json-and-more">Webdev, YAML, JSON, and more</h2>
+<p><a href="https://prettier.io/docs/en/">Prettier</a> is a code formatter devoted to front-end langages like
+JavaScript, TypeScript, HTML and many more, but it also has plugins for other languages.
+As you may be using only a subset of its supported languages,
+limiting which files Prettier will run on can improve performance.</p>
+<p>Prettier is a good choice for YAML, JSON and Markdown files.
+In the configuration below, I only select files with extension <em>.ymal</em>, <em>.yml</em>, <em>.json</em>, and <em>.md</em>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">repos</span>:
+  <span style="color:#75715e"># Format: YAML, JSON and Markdown</span>
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/pre-commit/mirrors-prettier</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">v4.0.0-alpha.8</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">prettier</span>
+        <span style="color:#f92672">files</span>: <span style="color:#ae81ff">^(.*\.ya?ml|.*\.json|.*\.md)$</span>
+</code></pre></div><p>There are several configuration files names, I will use <code>.prettierrc.yaml</code> here.
+See <a href="https://prettier.io/docs/en/configuration">Configuration file</a> for more options.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># .prettierrc.yaml</span>
+
+<span style="color:#f92672">tabWidth</span>: <span style="color:#ae81ff">2</span>
+<span style="color:#f92672">endOfLine</span>: <span style="color:#ae81ff">lf</span>
+</code></pre></div><h2 id="yaml">YAML</h2>
+<p>In addition to <a href="#webdev-yaml-json-and-more">Prettier</a>,
+<a href="https://yamllint.readthedocs.io/en/stable/"><code>yamllint</code></a> provides a code linter for YAML files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">repos</span>:
+  <span style="color:#75715e"># Lint: YAML</span>
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/adrienverge/yamllint</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">v1.35.1</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">yamllint</span>
+        <span style="color:#f92672">args</span>: [<span style="color:#e6db74">&#34;-d {extends: relaxed, rules: {line-length: disable}}&#34;</span>, <span style="color:#e6db74">&#34;-s&#34;</span>]
+        <span style="color:#f92672">files</span>: <span style="color:#ae81ff">\.(yaml|yml)$</span>
+</code></pre></div><p>The <a href="https://yamllint.readthedocs.io/en/stable/disable_with_comments.html">inline ignore syntax</a> is:</p>
+<ul>
+<li>
+<p>Disable one or more rules in a line:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># yamllint disable-line rule:line-length</span>
+<span style="color:#f92672">disable-rule</span>: <span style="color:#ae81ff">This line is waaaaaaaaaay too long but yamllint will not report anything about it</span>
+
+<span style="color:#75715e"># yamllint disable-line rule:hyphens rule:commas</span>
+<span style="color:#f92672">disable-rules</span>: [<span style="color:#ae81ff">hyphens, commas]</span>
+
+<span style="color:#75715e"># yamllint disable-line</span>
+<span style="color:#f92672">disable-all</span>: <span style="color:#ae81ff">Disable _all_ rules (not recommended)</span>
+</code></pre></div></li>
+<li>
+<p>Disable one or more rules in a code block:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">disable-rules</span>:
+    <span style="color:#75715e"># yamllint disable rule:colons</span>
+    - <span style="color:#f92672">Lorem       </span>: <span style="color:#ae81ff">ipsum</span>
+    <span style="color:#f92672">dolor       </span>: <span style="color:#ae81ff">sit amet,</span>
+    <span style="color:#f92672">consectetur </span>: <span style="color:#ae81ff">adipiscing elit</span>
+    <span style="color:#75715e"># yamllint enable rule:colons</span>
+
+<span style="color:#f92672">disable-all</span>:
+    <span style="color:#75715e"># yamllint disable</span>
+    - <span style="color:#f92672">Lorem       </span>:
+            <span style="color:#f92672">ipsum</span>:
+            <span style="color:#f92672">dolor </span>: [   <span style="color:#ae81ff">sit,amet]</span>
+    -         <span style="color:#f92672">consectetur </span>: <span style="color:#ae81ff">adipiscing elit</span>
+    <span style="color:#75715e"># yamllint enable</span>
+</code></pre></div></li>
+</ul>
+<h2 id="markdown">Markdown</h2>
+<p>In addition to <a href="#webdev-yaml-json-and-more">Prettier</a>,
+<a href="https://github.com/igorshubovych/markdownlint-cli"><code>markdownlint-cli</code></a>
+provides a code linter for Markdown files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">repos</span>:
+  <span style="color:#75715e"># Lint: Markdown</span>
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/igorshubovych/markdownlint-cli</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">v0.40.0</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">markdownlint</span>
+        <span style="color:#f92672">args</span>: [<span style="color:#e6db74">&#34;--fix&#34;</span>]
+</code></pre></div><p>Configuration can be set in a <code>.markdownlint.yaml</code> file.
+The configuration below addresses a common issue with tables:
+it lets them be as long as they need to.
+See <a href="https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md">Rules</a>
+for a description of all rules.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># .markdownlint.yaml</span>
+
+<span style="color:#75715e"># Default state for all rules</span>
+<span style="color:#f92672">default</span>: <span style="color:#66d9ef">true</span>
+
+<span style="color:#75715e"># MD013/line-length - Line length</span>
+<span style="color:#f92672">MD013</span>:
+  <span style="color:#f92672">line_length</span>: <span style="color:#ae81ff">100</span>
+  <span style="color:#f92672">tables</span>: <span style="color:#66d9ef">false</span>
+</code></pre></div><p>The <a href="https://github.com/DavidAnson/markdownlint/tree/main?tab=readme-ov-file#configuration">inline ignore syntax</a>
+is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">Disable one or more rules for the current line. <span style="color:#75715e">&lt;!-- markdownlint-disable-line MD001 MD005 --&gt;</span>
+
+<span style="color:#75715e">&lt;!-- markdownlint-disable MD001 MD005 --&gt;</span>
+
+Disable/enable one or more rules in a block.
+
+<span style="color:#66d9ef">-</span> MD001: heading-increment
+
+<span style="color:#66d9ef">*</span> MD005: list-indent
+
+<span style="color:#75715e">&lt;!-- markdownlint-enable MD001 MD005 --&gt;</span>
+
+<span style="color:#75715e">&lt;!-- markdownlint-disable --&gt;</span>
+
+Disable/enable <span style="font-style:italic">_all_</span> rules in a block.
+
+<span style="color:#75715e">&lt;!-- markdownlint-enable --&gt;</span>
+</code></pre></div><h2 id="shell-and-bash">Shell and Bash</h2>
+<p>Shell and bash scripts are pretty common in many projects.</p>
+<ul>
+<li><code>shellcheck-py</code>: builds on top of <a href="https://github.com/koalaman/shellcheck">ShellCheck</a>,
+a shell script linter.
+Rules for ShellCheck can be found in the <a href="https://www.shellcheck.net/wiki/">Wiki pages</a></li>
+<li><code>bashate</code>: a linter for bash scripts, complementing ShellCheck.
+See rules in <a href="https://github.com/openstack/bashate?tab=readme-ov-file#currently-supported-checks">Currently Supported Checks</a>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">repos</span>:
+  <span style="color:#75715e"># Lint: Shell scripts</span>
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/shellcheck-py/shellcheck-py</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">v0.10.0.1</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">shellcheck</span>
+        <span style="color:#f92672">args</span>: [<span style="color:#e6db74">&#34;-x&#34;</span>]
+
+    <span style="color:#75715e"># Lint: Bash scripts</span>
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/openstack/bashate</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">2.1.1</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">bashate</span>
+</code></pre></div><p>ShellCheck may be configured in the <code>.shellcheckrc</code> file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># .shellcheckrc</span>
+
+<span style="color:#75715e"># Don&#39;t suggest [ -n &#34;$VAR&#34; ] over [ ! -z &#34;$VAR&#34; ]</span>
+disable<span style="color:#f92672">=</span>SC2236
+
+<span style="color:#75715e"># Suggest ${VAR} in place of $VAR</span>
+enable<span style="color:#f92672">=</span>require-variable-braces
+</code></pre></div><p>The <a href="https://www.shellcheck.net/wiki/Ignore">inline ignore syntax</a> is:</p>
+<ul>
+<li>
+<p>Disable one or more rules in a line:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>
+source <span style="color:#66d9ef">$(</span>dirname <span style="color:#e6db74">&#34;</span>$0<span style="color:#e6db74">/utils.sh&#34;</span><span style="color:#66d9ef">)</span>
+
+<span style="color:#75715e"># shellcheck disable=SC2059,SC2034</span>
+echo <span style="color:#e6db74">&#34;Disable rules SC2059 and SC2034 for this line&#34;</span>
+
+<span style="color:#75715e"># shellcheck disable=all</span>
+echo <span style="color:#e6db74">&#34;Disable all rules for this line&#34;</span>
+</code></pre></div></li>
+<li>
+<p>Disable all rules in a file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span><span style="color:#75715e"># shellcheck disable=SC2059,SC2034</span>
+
+source <span style="color:#66d9ef">$(</span>dirname <span style="color:#e6db74">&#34;</span>$0<span style="color:#e6db74">/utils.sh&#34;</span><span style="color:#66d9ef">)</span>
+
+echo <span style="color:#e6db74">&#34;Disable rules SC2059 and SC2034 in the entire file.&#34;</span>
+echo <span style="color:#e6db74">&#34;Must be at the top of the file&#34;</span>
+</code></pre></div></li>
+</ul>
+<h2 id="docker">Docker</h2>
+<p>Hadolint helps a lot in improving the stability of Docker images as well as reducing their overall size.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">repos</span>:
+  <span style="color:#75715e"># Lint: Dockerfile</span>
+  - <span style="color:#f92672">repo</span>: <span style="color:#ae81ff">https://github.com/hadolint/hadolint</span>
+    <span style="color:#f92672">rev</span>: <span style="color:#ae81ff">v2.12.0</span>
+    <span style="color:#f92672">hooks</span>:
+      - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">hadolint</span>
+</code></pre></div><p>Configuration may be done in a <code>.hadolint.yaml</code> file.
+You can find the list of <a href="https://github.com/hadolint/hadolint?tab=readme-ov-file#rules">Rules</a>
+in the repository.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># .hadolint.yaml</span>
+
+<span style="color:#f92672">ignored</span>:
+  - <span style="color:#ae81ff">DL3008</span> <span style="color:#75715e"># Pin versions in `apt-get install`</span>
+</code></pre></div><p>The <a href="https://github.com/hadolint/hadolint?tab=readme-ov-file#ignoring-rules">inline ignore syntax</a> is:</p>
+<ul>
+<li>Ignore one or more rules in a file:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#75715e"># hadolint global ignore=DL3003,DL3006,SC1035</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> ubuntu:22.04</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> echo <span style="color:#e6db74">&#34;global&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><ul>
+<li>Ignore one or more rules in a line:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#75715e"># hadolint ignore=DL3006</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> ubuntu</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># hadolint ignore=DL3003,SC1035</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> echo <span style="color:#e6db74">&#34;line&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://gabriel-msilva.github.io/melloc/tags/productivity/">productivity</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://gabriel-msilva.github.io/melloc/post/2024-04-18-git-hooks-and-pre-commit/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Git Hooks and pre-commit</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share pre-commit: Hooks reference on twitter"
+        href="https://twitter.com/intent/tweet/?text=pre-commit%3a%20Hooks%20reference&amp;url=https%3a%2f%2fgabriel-msilva.github.io%2fmelloc%2fpost%2f2024-05-11-pre-commit-hooks-reference%2f&amp;hashtags=productivity">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share pre-commit: Hooks reference on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fgabriel-msilva.github.io%2fmelloc%2fpost%2f2024-05-11-pre-commit-hooks-reference%2f&amp;title=pre-commit%3a%20Hooks%20reference&amp;summary=pre-commit%3a%20Hooks%20reference&amp;source=https%3a%2f%2fgabriel-msilva.github.io%2fmelloc%2fpost%2f2024-05-11-pre-commit-hooks-reference%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share pre-commit: Hooks reference on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fgabriel-msilva.github.io%2fmelloc%2fpost%2f2024-05-11-pre-commit-hooks-reference%2f&title=pre-commit%3a%20Hooks%20reference">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share pre-commit: Hooks reference on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fgabriel-msilva.github.io%2fmelloc%2fpost%2f2024-05-11-pre-commit-hooks-reference%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share pre-commit: Hooks reference on whatsapp"
+        href="https://api.whatsapp.com/send?text=pre-commit%3a%20Hooks%20reference%20-%20https%3a%2f%2fgabriel-msilva.github.io%2fmelloc%2fpost%2f2024-05-11-pre-commit-hooks-reference%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share pre-commit: Hooks reference on telegram"
+        href="https://telegram.me/share/url?text=pre-commit%3a%20Hooks%20reference&amp;url=https%3a%2f%2fgabriel-msilva.github.io%2fmelloc%2fpost%2f2024-05-11-pre-commit-hooks-reference%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://gabriel-msilva.github.io/melloc/">melloc()</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
