@@ -1,0 +1,59 @@
+/*-- scss:defaults --*/
+
+// Base colors
+$body-bg: #1e1e1e;
+$body-color: #e8e8e8;
+
+// Links
+$link-color: #7ab8ff;
+
+// Navbar
+$navbar-bg: #252526;
+$navbar-fg: #e8e8e8;
+
+// Cards
+$card-bg: #2d2d30;
+$card-border-color: #404040;
+
+// Code
+$code-color: #dcdcaa;
+$code-block-bg: #252526;
+$code-block-border-left-color: #3a3a3a;
+
+// Figures
+$figure-caption-color: #b9b9b9;
+
+/*-- scss:rules --*/
+
+pre,
+.sourceCode {
+  background-color: #252526;
+}
+
+code {
+  color: #dcdcaa;
+}
+
+div.sourceCode,
+pre.sourceCode,
+pre {
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+p code,
+li code,
+td code,
+th code {
+  background-color: #2f2f2f;
+  border: 1px solid #3a3a3a;
+}
+
+.quarto-figure figure,
+.quarto-figure img,
+.cell-output-display img {
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+}

@@ -1,27 +1,32 @@
+.DEFAULT_GOAL := help
+
 CONDA_PREFIX = ./.venv
 
-.PHONY: help
-help: ## Show this help and exit.
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
-
 .PHONY: setup
-setup: ## Create Conda environment and install pre-commit hooks.
+setup: ## Setup the development environment
+	git lfs install
+
 	conda env create -p $(CONDA_PREFIX)
-	conda env update -f environment-dev.yml -p $(CONDA_PREFIX)
-	conda run -p $(CONDA_PREFIX) Rscript -e 'blogdown::install_hugo(getOption("blogdown.hugo.version"))'
 	conda run -p $(CONDA_PREFIX) pre-commit install
 
 	@echo "Activate the Conda environment:"
 	@echo "  $$ conda activate $(CONDA_PREFIX)"
 
-.PHONY: build
-build: ## Build site with blogdown.
+.PHONY: render
+render: ## Render website
 	Rscript -e 'blogdown::build_site(local = TRUE, build_rmd = "timestamp")'
 
-.PHONY: serve
-serve: build ## Serve blogdown site.
-	Rscript -e 'blogdown::serve_site()'
+.PHONY: preview
+preview:  ## Render and preview website
+	quarto preview melloc
 
-.PHONY: stop
-stop:
-	Rscript -e 'blogdown::stop_server()'
+.PHONY: lint  ## Run pre-commit hooks on all files
+lint:
+	conda run -p $(CONDA_PREFIX) pre-commit run --all-files
+
+.PHONY: help
+help:  ## Show this help message
+	@printf "\033[32mUsage:\033[0m \033[36mmake <COMMAND>\033[0m\n"
+	@echo ""
+	@printf "\033[32mCommands:\033[0m\n"
+	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  \033[36m%-9s\033[0m %s\n", $$1, $$2 }'

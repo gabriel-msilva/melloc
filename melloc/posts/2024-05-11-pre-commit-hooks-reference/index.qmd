@@ -1,0 +1,560 @@
+---
+title: "pre-commit: Hooks reference"
+subtitle: A reference guide to pre-commit hooks
+author: Gabriel Mello Silva
+date: 2024-05-11
+abstract: My selection of commonly used pre-commit hooks for different languages and tools.
+categories: [programming]
+toc: true
+image: thumbnail.png
+---
+
+I always find myself consulting documentation to remember how to configure tools, so this is a compiled reference of [pre-commit](https://pre-commit.com) hooks I use most.
+
+::: {.callout-tip}
+If you not familiar with pre-commit, check the previous article:
+[Git hooks and pre-commit](./../2024-04-18-git-hooks-and-pre-commit/).
+:::
+
+Each section contains hooks for a language, or a set of languages.
+The first code block always shows the repository and hook mappings in the _.pre-commit-config.yaml_ file.
+A baseline for configuration of the hook or tool is also given.
+Refer to the linked documentations for fine-tuning to your needs.
+
+As sometimes rules do not apply or they are false positives, every code linter has a way to ignore rules.
+Usually it can be done in the command line, in the configuration file, or in code itself.
+These options are illustrated in each section, when applicable.
+
+## General
+
+pre-commit has its own set of hooks that are quite generic and can be used in any project.
+Details about each hook can be found in the [_pre-commit-hooks_ repository](https://github.com/pre-commit/pre-commit-hooks?tab=readme-ov-file#hooks-available).
+
+```yaml
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: end-of-file-fixer
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
+```
+
+## Python
+
+### uv
+
+[Astral.sh](https://github.com/astral-sh) is coming up with several promising tools for the Python ecosystem.
+I highly recommend checking out [uv](https://docs.astral.sh/uv/), a project and package manager.
+
+_uv_ uses a lock file to ensure that all developers in a project are using the same versions of dependencies.
+While `uv add <package>` automatically updates the lock file, if you edit `pyproject.toml` manually, you may forget to update the lock file.
+
+The `uv-lock` hook checks if the lock file is up to date with the `pyproject.toml` file and prevents commits if it is not.
+
+```yaml
+repos:
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.11.3
+    hooks:
+      - id: uv-lock
+```
+
+### ruff
+
+Ruff, also from Astral.sh, really impressed me as an all-in-one code formatter and linter for Python.
+It wraps a lot of tools and extensions in a single place and is faster than _Flake8_ or _PycodeStyle_.
+
+:::{.callout-tip}
+Ruff also has an [extension for VS Code](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff).
+:::
+
+```yaml
+repos:
+  # Format/lint: Python
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.9
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+```
+
+Ruff can be configured through a _pyproject.toml_, _ruff.toml_, or _.ruff.toml_ file.
+See [Configuring Ruff](https://docs.astral.sh/ruff/configuration/) for the default configuration
+and [Settings](https://docs.astral.sh/ruff/settings/) for a comprehensive list of configuration options.
+
+```toml
+# pyproject.toml
+
+[tool.ruff]
+target-version = "py310"
+
+[tool.ruff.lint]
+extend-select = [
+  "I",    # isort
+  "A",    # flake8-builtins
+  "B",    # flake8-bugbear
+  "SIM",  # flake8-simplify
+]
+```
+
+The [inline ignore syntax](https://flake8.pycqa.org/en/3.1.1/user/ignoring-errors.html#in-line-ignoring-errors)
+is:
+
+```python
+#> Ignore rule F841
+i = 0  # noqa: F841
+
+#> Ignore rules multiple rules
+j = 1  # noqa: E741, F841
+
+#> Ignore _all_ violations
+k = 2  # noqa
+```
+
+The syntax applies to `flake8` (see below).
+
+### black + flake8 + isort
+
+> I highly recommend using [Ruff](#ruff) instead of these because it wraps so much in
+> a single tool (and configuration file).
+
+The canonical code formatter and linter tools for Python.
+
+- `black`: code formatter
+- `flake8`: code linter
+- `isort`: sort Python imports
+
+```yaml
+repos:
+  # Format: Python
+  - repo: https://github.com/psf/black
+    rev: 24.4.2
+    hooks:
+      - id: black
+
+  # Lint: Python
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+
+  # Format: Python imports
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+```
+
+Configuration is more troublesome, because you have to look for options in a bunch of different documentations and may be a lot of tweaking between tools.
+That is why I am enjoying Ruff so much.
+For reference, here is a sample configuration:
+
+```toml
+# pyproject.toml
+
+[tool.black]
+target-version = ["py310"]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+virtual_env = "venv"
+```
+
+```ini
+# .flake8 (flake8 does not support pyproject.toml)
+
+[flake8]
+extend-ignore =
+  "E501",  # Line too long
+  "W503",  # Line break occurred before binary operator
+  "E226",  # Missing white space around arithmetic operator
+```
+
+## R
+
+Code lint and formatting are powered by [`lintr`](https://lintr.r-lib.org/index.html)
+and [`styler`](https://styler.r-lib.org/index.html), respectively.
+
+```yaml
+repos:
+  # Format/lint: R
+  - repo: https://github.com/lorenzwalthert/precommit
+    rev: v0.4.2
+    hooks:
+      - id: lintr
+        name: Lint R
+      - id: style-files
+        name: Format R
+      - id: no-print-statement
+        name: Check print statement
+```
+
+The repository includes [other useful hooks](https://github.com/lorenzwalthert/precommit/blob/main/.pre-commit-hooks.yaml)
+directed at packages like `roxygen2` and `pkgdown`.
+
+You may configure `lintr` with the _.lintr_ file.
+See [Configuring linters](https://lintr.r-lib.org/articles/lintr.html#configuring-linters)
+and [Available linters](https://lintr.r-lib.org/reference/linters.html)
+for more configuration options.
+
+```R
+# .lintr
+
+linters: linters_with_defaults(
+    line_length_linter(88),
+    commented_code_linter = NULL
+  )
+```
+
+The [inline ignore syntax](https://styler.r-lib.org/articles/styler.html#ignoring-certain-lines) is:
+
+- Ignore current line:
+
+  ```R
+  #> Ignore line
+  ignore( this) # styler: off
+  f( ) # not ignored anymore
+  ```
+
+- Ignore code block:
+
+  ```R
+  foo <- 0
+
+  # styler: off
+  I_have(good+reasons, to = turn_off,
+  styler
+  )
+  # styler: on
+
+  bar <- 1
+  ```
+
+## SQL
+
+[SQLFluff](https://docs.sqlfluff.com/en/stable/) is a code linter and formatter for several dialects of SQL.
+It helps detecting bad practices and _inneficiencies_ in your query, besides auto-formatting your code.
+Great tool for refactoring prototype or legacy code.
+
+```yaml
+repos:
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: stable_version
+    hooks:
+      - id: sqlfluff-lint
+        args: [--dialect, postgres]
+      - id: sqlfluff-fix
+        args: [--dialect, postgres]
+```
+
+SQLFluff support several [configuration files](https://docs.sqlfluff.com/en/stable/configuration.html#configuration-files),
+such as _.sqlfluff_ and _pyproject.toml_.
+Check the [Default Configuration](https://docs.sqlfluff.com/en/stable/configuration.html#default-configuration)
+and [Rule index](https://docs.sqlfluff.com/en/stable/rules.html#rule-index) for full reference.
+
+```toml
+# pyproject.toml
+
+[tool.sqlfluff.core]
+templater = "jinja"
+sql_file_exts = ".sql,.sql.j2,.sql.jinja2"
+
+[tool.sqlfluff.indentation]
+indented_joins = false
+indented_using_on = true
+template_blocks_indent = false
+
+[tool.sqlfluff.templater]
+unwrap_wrapped_queries = true
+
+[tool.sqlfluff.templater.jinja]
+apply_dbt_builtins = false
+
+# For rule specific configuration, use dots between the names exactly
+# as you would in .sqlfluff. In the background, SQLFluff will unpack the
+# configuration paths accordingly.
+[tool.sqlfluff.rules.capitalisation.keywords]
+capitalisation_policy = "upper"
+```
+
+The [inline ignore syntax](https://docs.sqlfluff.com/en/stable/rules.html#inline-ignoring-errors) is:
+
+- Ignore current line:
+
+  ```sql
+  -- Ignore one or more rules
+  SELECT
+    a.a*a.b AS bad_1,  -- noqa: LT01
+    a.a *  a.b AS bad_2,  -- noqa: LT01, LT03
+  FROM my_table
+  ```
+
+- Ignore code block:
+
+  ```sql
+  -- Ignore rule AL02 from this line forward
+  SELECT col_a a FROM foo -- noqa: disable=AL02
+
+  -- Ignore all rules from this line forward
+  SELECT col_a a FROM foo -- noqa: disable=all
+
+  -- Enforce all rules from this line forward
+  SELECT col_a a FROM foo -- noqa: enable=all
+  ```
+
+## YAML, JSON, Markdown
+
+[Prettier](https://prettier.io/docs/en/) is a code formatter devoted to front-end languages like
+JavaScript, TypeScript, HTML and many more, but it also has plugins for other languages.
+As you may be using only a subset of its supported languages,
+limiting which files Prettier will run on can improve performance.
+
+Prettier is a good choice for YAML, JSON and Markdown files.
+In the configuration below, I only select files with extension _.ymal_, _.yml_, _.json_, and _.md_.
+
+```yaml
+repos:
+  # Format: YAML, JSON and Markdown
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        files: ^(.*\.ya?ml|.*\.json|.*\.md)$
+```
+
+There are several configuration files names, I will use `.prettierrc.yaml` here.
+See [Configuration file](https://prettier.io/docs/en/configuration) for more options.
+
+```yaml
+# .prettierrc.yaml
+
+tabWidth: 2
+endOfLine: lf
+```
+
+## YAML
+
+In addition to [Prettier](#webdev-yaml-json-and-more),
+[`yamllint`](https://yamllint.readthedocs.io/en/stable/) provides a code linter for YAML files.
+
+```yaml
+repos:
+  # Lint: YAML
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        args: ["-d {extends: relaxed, rules: {line-length: disable}}", "-s"]
+        files: \.(yaml|yml)$
+```
+
+The [inline ignore syntax](https://yamllint.readthedocs.io/en/stable/disable_with_comments.html) is:
+
+- Disable one or more rules in a line:
+
+  ```yaml
+  # yamllint disable-line rule:line-length
+  disable-rule: This line is waaaaaaaaaay too long but yamllint will not report anything about it
+
+  # yamllint disable-line rule:hyphens rule:commas
+  disable-rules: [hyphens, commas]
+
+  # yamllint disable-line
+  disable-all: Disable _all_ rules (not recommended)
+  ```
+
+- Disable one or more rules in a code block:
+
+  ```yaml
+  disable-rules:
+      # yamllint disable rule:colons
+      - Lorem       : ipsum
+      dolor       : sit amet,
+      consectetur : adipiscing elit
+      # yamllint enable rule:colons
+
+  disable-all:
+      # yamllint disable
+      - Lorem       :
+              ipsum:
+              dolor : [   sit,amet]
+      -         consectetur : adipiscing elit
+      # yamllint enable
+  ```
+
+## Markdown
+
+In addition to [Prettier](#webdev-yaml-json-and-more),
+[`markdownlint-cli`](https://github.com/igorshubovych/markdownlint-cli)
+provides a code linter for Markdown files.
+
+```yaml
+repos:
+  # Lint: Markdown
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.40.0
+    hooks:
+      - id: markdownlint
+        args: ["--fix"]
+```
+
+Configuration can be set in a `.markdownlint.yaml` file.
+The configuration below addresses a common issue with tables:
+it lets them be as long as they need to.
+See [Rules](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md)
+for a description of all rules.
+
+```yaml
+# .markdownlint.yaml
+
+# Default state for all rules
+default: true
+
+# MD013/line-length - Line length
+MD013:
+  line_length: 100
+  tables: false
+```
+
+The [inline ignore syntax](https://github.com/DavidAnson/markdownlint/tree/main?tab=readme-ov-file#configuration)
+is:
+
+```markdown
+Disable one or more rules for the current line. <!-- markdownlint-disable-line MD001 MD005 -->
+
+<!-- markdownlint-disable MD001 MD005 -->
+
+Disable/enable one or more rules in a block.
+
+- MD001: heading-increment
+
+* MD005: list-indent
+
+<!-- markdownlint-enable MD001 MD005 -->
+
+<!-- markdownlint-disable -->
+
+Disable/enable _all_ rules in a block.
+
+<!-- markdownlint-enable -->
+```
+
+## Shell and Bash
+
+Shell and bash scripts are pretty common in many projects.
+
+- `shellcheck-py`: builds on top of [ShellCheck](https://github.com/koalaman/shellcheck),
+  a shell script linter.
+  Rules for ShellCheck can be found in the [Wiki pages](https://www.shellcheck.net/wiki/)
+- `bashate`: a linter for bash scripts, complementing ShellCheck.
+  See rules in [Currently Supported Checks](https://github.com/openstack/bashate?tab=readme-ov-file#currently-supported-checks).
+
+```yaml
+repos:
+  # Lint: Shell scripts
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        args: ["-x"]
+
+    # Lint: Bash scripts
+  - repo: https://github.com/openstack/bashate
+    rev: 2.1.1
+    hooks:
+      - id: bashate
+```
+
+ShellCheck may be configured in the `.shellcheckrc` file.
+
+```sh
+# .shellcheckrc
+
+# Don't suggest [ -n "$VAR" ] over [ ! -z "$VAR" ]
+disable=SC2236
+
+# Suggest ${VAR} in place of $VAR
+enable=require-variable-braces
+```
+
+The [inline ignore syntax](https://www.shellcheck.net/wiki/Ignore) is:
+
+- Disable one or more rules in a line:
+
+  ```sh
+  #!/bin/sh
+
+  source $(dirname "$0/utils.sh")
+
+  # shellcheck disable=SC2059,SC2034
+  echo "Disable rules SC2059 and SC2034 for this line"
+
+  # shellcheck disable=all
+  echo "Disable all rules for this line"
+  ```
+
+- Disable all rules in a file:
+
+  ```sh
+  #!/bin/sh
+  # shellcheck disable=SC2059,SC2034
+
+  source $(dirname "$0/utils.sh")
+
+  echo "Disable rules SC2059 and SC2034 in the entire file."
+  echo "Must be at the top of the file"
+  ```
+
+## Docker
+
+Hadolint helps a lot in improving the stability of Docker images as well as reducing their overall size.
+
+```yaml
+repos:
+  # Lint: Dockerfile
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint
+```
+
+Configuration may be done in a `.hadolint.yaml` file.
+You can find the list of [Rules](https://github.com/hadolint/hadolint?tab=readme-ov-file#rules)
+in the repository.
+
+```yaml
+# .hadolint.yaml
+
+ignored:
+  - DL3008 # Pin versions in `apt-get install`
+```
+
+The [inline ignore syntax](https://github.com/hadolint/hadolint?tab=readme-ov-file#ignoring-rules) is:
+
+- Ignore one or more rules in a file:
+
+```Dockerfile
+# hadolint global ignore=DL3003,DL3006,SC1035
+FROM ubuntu:22.04
+
+RUN echo "global"
+```
+
+- Ignore one or more rules in a line:
+
+```Dockerfile
+# hadolint ignore=DL3006
+FROM ubuntu
+
+# hadolint ignore=DL3003,SC1035
+RUN echo "line"
+```

@@ -1,0 +1,31 @@
+project:
+  type: website
+
+website:
+  title: melloc()
+  description: Personal blog about Data Science and related subjects.
+  site-url: https://gabriel-msilva.github.io/melloc/
+  repo-url: https://github.com/gabriel-msilva/melloc
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        text: GitHub
+        href: https://github.com/gabriel-msilva
+      - icon: linkedin
+        text: LinkedIn
+        href: https://www.linkedin.com/in/gabriel-mello-silva
+
+format:
+  html:
+    theme:
+      dark:
+        - litera
+        - styles/dark.scss
+      light:
+        - litera
+        - styles/light.scss
+    css: styles/default.css
+    respect-user-color-scheme: true
+
+syntax-highlighting: github
