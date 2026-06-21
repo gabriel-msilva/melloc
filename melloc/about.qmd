@@ -1,0 +1,15 @@
+---
+title: About
+image: profile.png
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/gabriel-msilva
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/gabriel-mello-silva
+---
+
+I am Gabriel Mello Silva, currently working as a Machine Learning Engineer at [Nubank](https://nubank.com.br/).
