@@ -10,13 +10,13 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -25,75 +25,36 @@ jobs:
 
   build:
     needs: [test]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
         with:
           lfs: true
 
-      - uses: mamba-org/setup-micromamba@v1
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Conda environment
+        uses: mamba-org/setup-micromamba@v3
         with:
           environment-file: environment.yml
           cache-environment: true
           cache-downloads: true
 
-      - name: Install Hugo
-        shell: bash -el {0}
-        run: Rscript -e 'blogdown::install_hugo(getOption("blogdown.hugo.version"))'
+      - name: Render Quarto Project
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          path: melloc
 
-      - name: Build site
-        shell: bash -el {0}
-        run: Rscript -e 'blogdown::build_site(build_rmd = TRUE)'
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
+      - name: Publish to GitHub Pages
         if: ${{ github.ref == 'refs/heads/main' }}
+        uses: quarto-dev/quarto-actions/publish@v2
         with:
-          name: melloc
-          path: public/
-
-  deploy:
-    needs: [build]
-    if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-20.04
-    environment:
-      name: github-pages
-      url: https://gabriel-msilva.github.io/melloc/
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: gh-pages
-          lfs: true
-
-      - name: Clean working dir
-        run: |
-          rm -rf *
-          touch .nojekyll
-
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: melloc
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "noreply@github.com"
-
-      - name: Check changes
-        id: check
-        run: |
-          lines=`git diff --name-only | wc -l`
-          if [ $lines -gt 0 ]; then changed="true"; else changed="false"; fi
-          echo "changed=$changed" >> $GITHUB_OUTPUT
-
-      - name: Commit and push changes
-        if: steps.check.outputs.changed
-        run: |
-          SHA=${{ github.sha }}
-
-          git add .
-          git commit -m "CI: Update site (${{ github.run_number }} - ${SHA:0:7})"
-          git push origin
+          target: gh-pages
+          path: melloc
+          render: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
