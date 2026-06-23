@@ -11,8 +11,3 @@ listing:
 page-layout: full
 title-block-banner: true
 ---
-
-Welcome to my blog!
-
-I write about what I learn in Data Science, programming, and related topics whenever I have something worth sharing.
-Think of it as a notebook of ideas, learnings, and the occasional nerdy detour.
