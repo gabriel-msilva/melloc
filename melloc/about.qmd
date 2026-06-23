@@ -13,3 +13,8 @@ about:
 ---
 
 I am Gabriel Mello Silva, currently working as a Machine Learning Engineer at [Nubank](https://nubank.com.br/).
+
+I started this blog when I got really interested in playing with fractals -- shout out to [Veritasium](https://www.youtube.com/@veritasium)!
+By the way, the profile image above is a Julia set I generated with Python.
+
+This is a space where I share my learnings and projects about Data Science, programming, and related topics.
