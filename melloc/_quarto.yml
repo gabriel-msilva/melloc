@@ -27,5 +27,3 @@ format:
         - styles/light.scss
     css: styles/default.css
     respect-user-color-scheme: true
-
-syntax-highlighting: github
