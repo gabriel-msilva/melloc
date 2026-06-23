@@ -1,0 +1,57 @@
+---
+title: Announcing richer-prompt
+subtitle: Interactive terminal prompts for Python
+author: Gabriel Mello Silva
+date: 2026-06-23
+categories: [open-source, python, cli]
+toc: true
+image: thumbnail.png
+---
+
+Today I released the first version of `richer-prompt`, a Python package for interactive terminal prompts built on top of [Rich](https://github.com/Textualize/rich) and inspired by [Claude Code](https://claude.com/product/claude-code) design.
+
+- Repository: [github.com/gabriel-msilva/richer-prompt](https://github.com/gabriel-msilva/richer-prompt)
+- Documentation: [richer-prompt.readthedocs.io](https://richer-prompt.readthedocs.io/en/stable/)
+
+```sh
+pip install richer-prompt
+```
+
+![](https://raw.githubusercontent.com/gabriel-msilva/richer-prompt/refs/tags/0.1.0/docs/assets/demo.gif)
+
+## Motivation
+
+When I first started using Claude Code, one of the things that immediately stood out was its terminal user interface.
+The experience is clean and intuitive, making interactions with an AI agent feel easy directly from the command line.
+
+That inspired me to bring some of those interaction patterns to Python's `rich` ecosystem.
+
+`rich` is already adopted by many popular Python tools, including [Typer](https://typer.tiangolo.com/) and [FastAPI](https://fastapi.tiangolo.com/).
+Extending it with interactive prompt components allows developers to build fluid CLI applications while staying within the same framework.
+
+## Features
+
+:::{.callout-tip}
+See the [Usage](https://richer-prompt.readthedocs.io/en/stable/usage.html) section in the documentation for more details.
+:::
+
+The first release focuses on a compact set of prompt primitives for common CLI flows:
+
+- `Select` for single-choice selection
+- `MultiSelect` for selecting multiple options
+- `Tabs` for compact yes/no or mode-style prompts
+
+A number of customization options are available, including:
+
+- `Choice` objects allow for setting value/label/description
+- Rich theme integration for prompt styling
+
+## What is next
+
+I am planning on adding a "form" prompt (the same you usually see in Claude's plan mode) that will ask for multiple inputs in a single prompt, reusing the current prompts.
+
+Also, I must confess that I am not too happy with the overall complexity of the code, so I may revisit that in the future.
+First, I wanted to put the package out there.
+
+[streamlit-arborist](../2025-08-25-streamlit-arborist/) proved to me that feedback and ideas from the community can give extra motivation.
+If you try `richer-prompt`, I would love your feedback and ideas on [GitHub issues](https://github.com/gabriel-msilva/richer-prompt/issues).
