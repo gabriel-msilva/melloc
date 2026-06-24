@@ -11,7 +11,7 @@ toc: true
 image: thumbnail.png
 ---
 
-![](./thumbnail.png)
+![IPython session in terminal](./thumbnail.png)
 
 ## Introduction
 
@@ -134,7 +134,7 @@ and [VS Code's interactive window](https://code.visualstudio.com/docs/python/jup
 are effectively an IPython console.
 However they share the same flaw: they are associated with a single `.py` or `.ipynb` file.
 
-This makes *all* the difference.
+This makes _all_ the difference.
 It induces you to work on a single file.
 Even while exploring and testing, you should be thinking how to organize modules at different files.
 
@@ -158,7 +158,7 @@ conda activate my-env
 ```
 
 @fig-python-environment shows how to select the interpreter from this environment when working on your files.
-You can also press <kbd>F1</kbd> (or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>) and search *Python: Select Interpreter*.
+You can also press <kbd>F1</kbd> (or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>) and search _Python: Select Interpreter_.
 
 ![Selecting the Python interpreter in VS Code.](./figures/python-environment.png){#fig-python-environment}
 
@@ -166,7 +166,7 @@ Now set launch arguments to open an IPython session instead of the default Pytho
 Open VS Code settings file:
 
 1. Press <kbd>F1</kbd> (or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>)
-2. Go to *Preferences: Open User Settings (JSON)*
+2. Go to _Preferences: Open User Settings (JSON)_
 3. Set `python.terminal.launchArgs` to run IPython:
 
    ```json
@@ -274,7 +274,7 @@ c.InteractiveShellApp.exec_lines = ["%autoreload 2"]
 
 1. Create a Python environment and install `ipython`. Select it as Python interpreter in VS Code.
 
-1. Open VS Code settings: <kbd>F1</kbd> > *Preferences: Open User Settings (JSON)*
+1. Open VS Code settings: <kbd>F1</kbd> > _Preferences: Open User Settings (JSON)_
 
 1. Set `python.terminal.launchArgs` to run IPython:
 
@@ -298,5 +298,3 @@ c.InteractiveShellApp.exec_lines = ["%autoreload 2"]
    ```
 
 1. Run selected code with <kbd>Shift</kbd> + <kbd>Enter</kbd>
-
-[python-extension]: https://marketplace.visualstudio.com/items?itemName=ms-python.python

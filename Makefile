@@ -3,7 +3,7 @@
 CONDA_PREFIX = ./.venv
 
 .PHONY: setup
-setup: ## Setup the development environment
+setup:  ## Setup the development environment
 	git lfs install
 
 	conda env create -p $(CONDA_PREFIX)
@@ -13,15 +13,15 @@ setup: ## Setup the development environment
 	@echo "  $$ conda activate $(CONDA_PREFIX)"
 
 .PHONY: render
-render: ## Render website
+render:  ## Render website
 	Rscript -e 'blogdown::build_site(local = TRUE, build_rmd = "timestamp")'
 
 .PHONY: preview
 preview:  ## Render and preview website
 	quarto preview melloc
 
-.PHONY: lint  ## Run pre-commit hooks on all files
-lint:
+.PHONY: lint
+lint:  ## Run pre-commit hooks on all files
 	conda run -p $(CONDA_PREFIX) pre-commit run --all-files
 
 .PHONY: help
