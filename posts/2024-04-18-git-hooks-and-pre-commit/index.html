@@ -76,12 +76,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-6b6957c917596b414ec0b78690761e87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-ee0f6f77ea172fd51c6694e6c8aa8d66.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-6da4c574f2b73b1d562fef2c8ddf8a8f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-71c23d600e11e0754a49ae0b0d77b918.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-89426689a7a2272383b1dc324ff03ad8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -390,7 +390,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p><img src="./thumbnail.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./thumbnail.png" class="img-fluid figure-img"></p>
+<figcaption>Git Hooks and pre-commit</figcaption>
+</figure>
+</div>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <blockquote class="blockquote">
@@ -583,7 +588,7 @@ Tip
 <p>It would be easy to forget to manually update – and by “manually” I mean “running the script”– <em>requirements-dev.txt</em> every time there is an update to <em>environment.yml</em>. A good oportunnity to add a pre-commit hook and never worry again.</p>
 <p>There are many possible configurations for repository-local hooks, such as <a href="https://pre-commit.com/#repository-local-hooks">language support</a>. See <a href="https://pre-commit.com/#creating-new-hooks">Creating new hooks</a> for the full description.</p>
 <p>If you find that your hooks may be useful in other projects, you can create a <em>.pre-commit-hooks.yaml</em> file containing a list of hook mappings to share. Now pre-commit knows how to install hooks from your repository.</p>
-<p>This is how the hooks I used over the post are defined. For example, in <a href="https://github.com/pre-commit/pre-commit-hooks/blob/v4.6.0/.pre-commit-hooks.yaml">github.com/pre-commit/pre-commit-hooks (v4.6.0)</a> from <a href="#general">General</a> section:</p>
+<p>This is how the hooks I used over the post are defined. For example, in <a href="https://github.com/pre-commit/pre-commit-hooks/blob/v4.6.0/.pre-commit-hooks.yaml">github.com/pre-commit/pre-commit-hooks (v4.6.0)</a> from <a href="#usage">General</a> section:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .pre-commit-hooks.yaml (redacted)</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> check-added-large-files</span></span>

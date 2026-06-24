@@ -2,26 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/index.html</loc>
-    <lastmod>2026-06-21T01:07:00.604Z</lastmod>
+    <lastmod>2026-06-24T14:51:04.060Z</lastmod>
   </url>
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/posts/2023-03-12-vscode-ipython-setup/index.html</loc>
-    <lastmod>2026-06-21T01:07:00.739Z</lastmod>
+    <lastmod>2026-06-24T14:51:04.202Z</lastmod>
   </url>
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/posts/2024-05-11-pre-commit-hooks-reference/index.html</loc>
-    <lastmod>2026-06-21T01:07:00.742Z</lastmod>
+    <lastmod>2026-06-24T14:51:04.206Z</lastmod>
   </url>
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/posts/2022-02-08-mandelbrot-and-julia-sets/index.html</loc>
-    <lastmod>2026-06-21T01:07:00.735Z</lastmod>
+    <lastmod>2026-06-24T14:51:04.198Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabriel-msilva.github.io/melloc/posts/2025-08-25-streamlit-arborist/index.html</loc>
+    <lastmod>2026-06-24T14:51:04.209Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabriel-msilva.github.io/melloc/posts/2026-06-23-richer-prompt/index.html</loc>
+    <lastmod>2026-06-24T14:51:04.211Z</lastmod>
   </url>
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/posts/2024-04-18-git-hooks-and-pre-commit/index.html</loc>
-    <lastmod>2026-06-21T01:07:00.740Z</lastmod>
+    <lastmod>2026-06-24T14:51:04.204Z</lastmod>
   </url>
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/about.html</loc>
-    <lastmod>2026-06-21T01:07:00.604Z</lastmod>
+    <lastmod>2026-06-24T14:51:04.060Z</lastmod>
   </url>
 </urlset>

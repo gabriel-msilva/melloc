@@ -1,0 +1,17 @@
+/* Homepage listing excerpts contain inline code inside links (`a > code`).
+   Use explicit light/dark colors so code chips stay readable in both themes. */
+body.quarto-dark .listing-description a > code {
+  color: #dcdcaa;
+  background-color: #2f2f2f;
+  border: 1px solid #3a3a3a;
+  border-radius: 0.35rem;
+  padding: 0.1rem 0.35rem;
+}
+
+body.quarto-light .listing-description a > code {
+  color: #8b2f65;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.35rem;
+  padding: 0.1rem 0.35rem;
+}

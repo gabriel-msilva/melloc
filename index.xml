@@ -10,7 +10,218 @@
 <atom:link href="https://gabriel-msilva.github.io/melloc/index.xml" rel="self" type="application/rss+xml"/>
 <description>Personal blog about Data Science and related subjects.</description>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Sat, 11 May 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 23 Jun 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Announcing richer-prompt</title>
+  <dc:creator>Gabriel Mello Silva</dc:creator>
+  <link>https://gabriel-msilva.github.io/melloc/posts/2026-06-23-richer-prompt/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>Today I released the first version of <code>richer-prompt</code>, a Python package for interactive terminal prompts built on top of <a href="https://github.com/Textualize/rich">Rich</a> and inspired by <a href="https://claude.com/product/claude-code">Claude Code</a> design.</p>
+<ul>
+<li>Repository: <a href="https://github.com/gabriel-msilva/richer-prompt">github.com/gabriel-msilva/richer-prompt</a></li>
+<li>Documentation: <a href="https://richer-prompt.readthedocs.io/en/stable/">richer-prompt.readthedocs.io</a></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install richer-prompt</span></code></pre></div></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://raw.githubusercontent.com/gabriel-msilva/richer-prompt/refs/tags/0.1.0/docs/assets/demo.gif" class="img-fluid figure-img"></p>
+<figcaption>Running richer-prompt demo in the terminal</figcaption>
+</figure>
+</div>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>When I first started using Claude Code, one of the things that immediately stood out was its terminal user interface. The experience is clean and intuitive, making interactions with an AI agent feel easy directly from the command line.</p>
+<p>That inspired me to bring some of those interaction patterns to Python’s <code>rich</code> ecosystem.</p>
+<p><code>rich</code> is already adopted by many popular Python tools, including <a href="https://typer.tiangolo.com/">Typer</a> and <a href="https://fastapi.tiangolo.com/">FastAPI</a>. Extending it with interactive prompt components allows developers to build fluid CLI applications while staying within the same framework.</p>
+</section>
+<section id="features" class="level2">
+<h2 class="anchored" data-anchor-id="features">Features</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>See the <a href="https://richer-prompt.readthedocs.io/en/stable/usage.html">Usage</a> section in the documentation for more details.</p>
+</div>
+</div>
+<p>The first release focuses on a compact set of prompt primitives for common CLI flows:</p>
+<ul>
+<li><code>Select</code> for single-choice selection</li>
+<li><code>MultiSelect</code> for selecting multiple options</li>
+<li><code>Tabs</code> for compact yes/no or mode-style prompts</li>
+</ul>
+<p>A number of customization options are available, including:</p>
+<ul>
+<li><code>Choice</code> objects allow for setting value/label/description</li>
+<li>Rich theme integration for prompt styling</li>
+</ul>
+</section>
+<section id="what-is-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-next">What is next</h2>
+<p>I am planning on adding a “form” prompt (the same you usually see in Claude’s plan mode) that will ask for multiple inputs in a single prompt, reusing the current prompts.</p>
+<p>Also, I must confess that I am not too happy with the overall complexity of the code, so I may revisit that in the future. First, I wanted to put the package out there.</p>
+<p><a href="../2025-08-25-streamlit-arborist/">streamlit-arborist</a> proved to me that feedback and ideas from the community can give extra motivation. If you try <code>richer-prompt</code>, I would love your feedback and ideas on <a href="https://github.com/gabriel-msilva/richer-prompt/issues">GitHub issues</a>.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>open-source</category>
+  <category>python</category>
+  <category>cli</category>
+  <guid>https://gabriel-msilva.github.io/melloc/posts/2026-06-23-richer-prompt/</guid>
+  <pubDate>Tue, 23 Jun 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://gabriel-msilva.github.io/melloc/posts/2026-06-23-richer-prompt/thumbnail.png" medium="image" type="image/png" height="96" width="144"/>
+</item>
+<item>
+  <title>Announcing streamlit-arborist</title>
+  <dc:creator>Gabriel Mello Silva</dc:creator>
+  <link>https://gabriel-msilva.github.io/melloc/posts/2025-08-25-streamlit-arborist/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>I’m proud to announce my first open-source Python package: <code>streamlit-arborist</code>, a <a href="https://streamlit.io">Streamlit</a> component for visualizing hierarchical data structures as interactive tree views.</p>
+<ul>
+<li>Repository: <a href="https://github.com/gabriel-msilva/streamlit-arborist">github.com/gabriel-msilva/streamlit-arborist</a></li>
+<li>Demo app: <a href="https://st-arborist-example.streamlit.app">st-arborist-example.streamlit.app</a></li>
+<li>Documentation: <a href="https://streamlit-arborist.readthedocs.io">streamlit-arborist.readthedocs.io</a></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install streamlit-arborist</span></code></pre></div></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://gabriel-msilva.github.io/melloc/posts/2025-08-25-streamlit-arborist/figures/tree-view.png" class="img-fluid figure-img"></p>
+<figcaption><code>tree_view()</code> component in Streamlit</figcaption>
+</figure>
+</div>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>I worked in a quite large Streamlit application with hundreds of users. It had a file explorer-like interface for navigating pages, so a tree view was a natural widget.</p>
+<p>Streamlit ships a rich set of built-in widgets, but tree navigation is not among them. The closest custom component that existed was <a href="https://github.com/Schluca/streamlit_tree_select">streamlit-tree-select</a> but it was not a good fit for our use case.</p>
+<p>While we were able to build a custom tree out of HTML + CSS + hacky interaction with the internal Streamlit API, it generated a lot of extra code and we were at risk of being locked to a specific Streamlit version.</p>
+<p>It bothered me that such tree data structures were not well-represented in the Streamlit ecosystem. So I decided to build a custom component that could be reused in other projects. I knew I didn’t need to reinvent the wheel: React has very mature components for this, and Streamlit allows wrapping them as first-class widgets.</p>
+<p>I found <a href="https://github.com/brimdata/react-arborist">react-arborist</a>, a React component for tree views that is well-maintained and seemed a good choice due to its</p>
+<ol type="1">
+<li>Flexible API, which will offer several options for customization and interaction.</li>
+<li>Good performance for large trees, which is important in data-heavy applications.</li>
+</ol>
+</section>
+<section id="basic-usage" class="level2">
+<h2 class="anchored" data-anchor-id="basic-usage">Basic usage</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>See the <a href="https://streamlit-arborist.readthedocs.io/stable/usage.html">Usage</a> section in the documentation for more examples.</p>
+</div>
+</div>
+<p>The data should be a list of dictionaries, where each dictionary represents a node in the tree. Each node should have the following keys:</p>
+<ul>
+<li><code>id</code> (required)</li>
+<li><code>name</code>: string to display (optional)</li>
+<li><code>children</code>: list of nested nodes (optional)</li>
+</ul>
+<p>For example,</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> streamlit_arborist <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> tree_view</span>
+<span id="cb2-2"></span>
+<span id="cb2-3">data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb2-4">    {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Node 1"</span>},</span>
+<span id="cb2-5">    {</span>
+<span id="cb2-6">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2"</span>,</span>
+<span id="cb2-7">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Node 2"</span>,</span>
+<span id="cb2-8">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"children"</span>: [</span>
+<span id="cb2-9">            {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2.1"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Node 2.1"</span>},</span>
+<span id="cb2-10">            {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2.2"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Node 2.2"</span>}</span>
+<span id="cb2-11">        ]</span>
+<span id="cb2-12">    }</span>
+<span id="cb2-13">]</span>
+<span id="cb2-14"></span>
+<span id="cb2-15">selected <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> tree_view(data)</span></code></pre></div></div>
+<p><code>tree_view</code> returns the full dictionary of the selected node, so any extra keys you include are available downstream.</p>
+<p>The component comes with a range of options, such as customization of sizing and icons (supports Material Symbols) and programmatic selection and filtering. See the <a href="https://streamlit-arborist.readthedocs.io/en/latest/reference.html">Reference API</a> for more details.</p>
+</section>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">What’s next</h2>
+<p>This is the initial release with the <code>tree_view</code> component for single-node selection. Future releases may add more interaction modes and customization options.</p>
+<p>Feedback and contributions are welcome on <a href="https://github.com/gabriel-msilva/streamlit-arborist">GitHub</a>!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>open-source</category>
+  <category>python</category>
+  <category>streamlit</category>
+  <guid>https://gabriel-msilva.github.io/melloc/posts/2025-08-25-streamlit-arborist/</guid>
+  <pubDate>Mon, 25 Aug 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://gabriel-msilva.github.io/melloc/posts/2025-08-25-streamlit-arborist/thumbnail.png" medium="image" type="image/png" height="96" width="144"/>
+</item>
 <item>
   <title>pre-commit: Hooks reference</title>
   <dc:creator>Gabriel Mello Silva</dc:creator>
@@ -2079,7 +2290,12 @@ font-style: inherit;">"line"</span></span></code></pre></div></div>
 
 
 
-<p><img src="https://gabriel-msilva.github.io/melloc/posts/2024-04-18-git-hooks-and-pre-commit/thumbnail.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://gabriel-msilva.github.io/melloc/posts/2024-04-18-git-hooks-and-pre-commit/thumbnail.png" class="img-fluid figure-img"></p>
+<figcaption>Git Hooks and pre-commit</figcaption>
+</figure>
+</div>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <blockquote class="blockquote">
@@ -3150,7 +3366,12 @@ font-style: inherit;">]</span></span></code></pre></div></div>
 
 
 
-<p><img src="https://gabriel-msilva.github.io/melloc/posts/2023-03-12-vscode-ipython-setup/thumbnail.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://gabriel-msilva.github.io/melloc/posts/2023-03-12-vscode-ipython-setup/thumbnail.png" class="img-fluid figure-img"></p>
+<figcaption>IPython session in terminal</figcaption>
+</figure>
+</div>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Programming for Data Analysis can be quite different in some aspects of “traditional” software development. At first, you don’t expect a specific input (dependent variables, or features) and you must iterate a lot until you get a satisfactory output (predictions of a model). There is a lot more exploring. Often you stop typing to ask yourself:</p>

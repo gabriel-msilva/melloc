@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Gabriel Mello Silva">
+<meta name="dcterms.date" content="2025-08-25">
 
-<title>melloc()</title>
+<title>Announcing streamlit-arborist – melloc()</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,30 +25,63 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-71c23d600e11e0754a49ae0b0d77b918.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-89426689a7a2272383b1dc324ff03ad8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-71c23d600e11e0754a49ae0b0d77b918.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-89426689a7a2272383b1dc324ff03ad8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -74,68 +109,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles/default.css">
-<link rel="alternate" type="application/rss+xml" title="melloc()" href="index.xml" data-external="1"></head>
+<link rel="stylesheet" href="../../styles/default.css">
+</head>
 
 <body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
@@ -313,7 +290,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">melloc()</span>
     </a>
   </div>
@@ -324,7 +301,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
@@ -348,251 +325,134 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">melloc()</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Announcing streamlit-arborist</h1>
+            <p class="subtitle lead">Interactive tree view for Streamlit</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">open-source</div>
+                <div class="quarto-category">python</div>
+                <div class="quarto-category">streamlit</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Gabriel Mello Silva </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 25, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Y2xp">cli <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWF0aA==">math <span class="quarto-category-count">(1)</span></div><div class="category" data-category="b3Blbi1zb3VyY2U=">open-source <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cHJvZ3JhbW1pbmc=">programming <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cHl0aG9u">python <span class="quarto-category-count">(4)</span></div><div class="category" data-category="c3RyZWFtbGl0">streamlit <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic usage</a></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">What’s next</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
 
+<p>I’m proud to announce my first open-source Python package: <code>streamlit-arborist</code>, a <a href="https://streamlit.io">Streamlit</a> component for visualizing hierarchical data structures as interactive tree views.</p>
+<ul>
+<li>Repository: <a href="https://github.com/gabriel-msilva/streamlit-arborist">github.com/gabriel-msilva/streamlit-arborist</a></li>
+<li>Demo app: <a href="https://st-arborist-example.streamlit.app">st-arborist-example.streamlit.app</a></li>
+<li>Documentation: <a href="https://streamlit-arborist.readthedocs.io">streamlit-arborist.readthedocs.io</a></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install streamlit-arborist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./figures/tree-view.png" class="img-fluid figure-img"></p>
+<figcaption><code>tree_view()</code> component in Streamlit</figcaption>
+</figure>
+</div>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>I worked in a quite large Streamlit application with hundreds of users. It had a file explorer-like interface for navigating pages, so a tree view was a natural widget.</p>
+<p>Streamlit ships a rich set of built-in widgets, but tree navigation is not among them. The closest custom component that existed was <a href="https://github.com/Schluca/streamlit_tree_select">streamlit-tree-select</a> but it was not a good fit for our use case.</p>
+<p>While we were able to build a custom tree out of HTML + CSS + hacky interaction with the internal Streamlit API, it generated a lot of extra code and we were at risk of being locked to a specific Streamlit version.</p>
+<p>It bothered me that such tree data structures were not well-represented in the Streamlit ecosystem. So I decided to build a custom component that could be reused in other projects. I knew I didn’t need to reinvent the wheel: React has very mature components for this, and Streamlit allows wrapping them as first-class widgets.</p>
+<p>I found <a href="https://github.com/brimdata/react-arborist">react-arborist</a>, a React component for tree views that is well-maintained and seemed a good choice due to its</p>
+<ol type="1">
+<li>Flexible API, which will offer several options for customization and interaction.</li>
+<li>Good performance for large trees, which is important in data-heavy applications.</li>
+</ol>
+</section>
+<section id="basic-usage" class="level2">
+<h2 class="anchored" data-anchor-id="basic-usage">Basic usage</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>See the <a href="https://streamlit-arborist.readthedocs.io/stable/usage.html">Usage</a> section in the documentation for more examples.</p>
+</div>
+</div>
+<p>The data should be a list of dictionaries, where each dictionary represents a node in the tree. Each node should have the following keys:</p>
+<ul>
+<li><code>id</code> (required)</li>
+<li><code>name</code>: string to display (optional)</li>
+<li><code>children</code>: list of nested nodes (optional)</li>
+</ul>
+<p>For example,</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> streamlit_arborist <span class="im">import</span> tree_view</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"id"</span>: <span class="st">"1"</span>, <span class="st">"name"</span>: <span class="st">"Node 1"</span>},</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"id"</span>: <span class="st">"2"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"name"</span>: <span class="st">"Node 2"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"children"</span>: [</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"id"</span>: <span class="st">"2.1"</span>, <span class="st">"name"</span>: <span class="st">"Node 2.1"</span>},</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"id"</span>: <span class="st">"2.2"</span>, <span class="st">"name"</span>: <span class="st">"Node 2.2"</span>}</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>selected <span class="op">=</span> tree_view(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>tree_view</code> returns the full dictionary of the selected node, so any extra keys you include are available downstream.</p>
+<p>The component comes with a range of options, such as customization of sizing and icons (supports Material Symbols) and programmatic selection and filtering. See the <a href="https://streamlit-arborist.readthedocs.io/en/latest/reference.html">Reference API</a> for more details.</p>
+</section>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">What’s next</h2>
+<p>This is the initial release with the <code>tree_view</code> component for single-node selection. Future releases may add more interaction modes and customization options.</p>
+<p>Feedback and contributions are welcome on <a href="https://github.com/gabriel-msilva/streamlit-arborist">GitHub</a>!</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="b3Blbi1zb3VyY2UlMkNweXRob24lMkNjbGk=" data-listing-date-sort="1782172800000" data-listing-file-modified-sort="1782312664211" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="268">
-<div class="thumbnail"><a href="./posts/2026-06-23-richer-prompt/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2026-06-23-richer-prompt/thumbnail.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2026-06-23-richer-prompt/index.html" class="no-external">Announcing richer-prompt</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-06-23-richer-prompt/index.html" class="no-external">Interactive terminal prompts for Python</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('b3Blbi1zb3VyY2U='); return false;">open-source</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2xp'); return false;">cli</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2026-06-23-richer-prompt/index.html" class="no-external">
-Today I released the first version of <code>richer-prompt</code>, a Python package for interactive terminal prompts built on top of Rich and inspired by Claude Code design.
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2026-06-23-richer-prompt/index.html" class="no-external">
-<div class="listing-date">
-Jun 23, 2026
-</div>
-<div class="listing-author">
-Gabriel Mello Silva
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="b3Blbi1zb3VyY2UlMkNweXRob24lMkNzdHJlYW1saXQ=" data-listing-date-sort="1756080000000" data-listing-file-modified-sort="1782312664209" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="430">
-<div class="thumbnail"><a href="./posts/2025-08-25-streamlit-arborist/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2025-08-25-streamlit-arborist/thumbnail.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2025-08-25-streamlit-arborist/index.html" class="no-external">Announcing streamlit-arborist</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/2025-08-25-streamlit-arborist/index.html" class="no-external">Interactive tree view for Streamlit</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('b3Blbi1zb3VyY2U='); return false;">open-source</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c3RyZWFtbGl0'); return false;">streamlit</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2025-08-25-streamlit-arborist/index.html" class="no-external">
-I’m proud to announce my first open-source Python package: <code>streamlit-arborist</code>, a Streamlit component for visualizing hierarchical data structures as interactive tree views.
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2025-08-25-streamlit-arborist/index.html" class="no-external">
-<div class="listing-date">
-Aug 25, 2025
-</div>
-<div class="listing-author">
-Gabriel Mello Silva
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="cHJvZ3JhbW1pbmc=" data-listing-date-sort="1715385600000" data-listing-file-modified-sort="1782312664206" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1990">
-<div class="thumbnail"><a href="./posts/2024-05-11-pre-commit-hooks-reference/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2024-05-11-pre-commit-hooks-reference/thumbnail.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2024-05-11-pre-commit-hooks-reference/index.html" class="no-external">pre-commit: Hooks reference</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/2024-05-11-pre-commit-hooks-reference/index.html" class="no-external">A reference guide to pre-commit hooks</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvZ3JhbW1pbmc='); return false;">programming</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2024-05-11-pre-commit-hooks-reference/index.html" class="no-external">
-<p>My selection of commonly used pre-commit hooks for different languages and tools.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2024-05-11-pre-commit-hooks-reference/index.html" class="no-external">
-<div class="listing-date">
-May 11, 2024
-</div>
-<div class="listing-author">
-Gabriel Mello Silva
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="cHJvZ3JhbW1pbmc=" data-listing-date-sort="1713398400000" data-listing-file-modified-sort="1782312664204" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1892">
-<div class="thumbnail"><a href="./posts/2024-04-18-git-hooks-and-pre-commit/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2024-04-18-git-hooks-and-pre-commit/thumbnail.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2024-04-18-git-hooks-and-pre-commit/index.html" class="no-external">Git Hooks and pre-commit</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/2024-04-18-git-hooks-and-pre-commit/index.html" class="no-external">Save time and brainpower to enforce code standards.</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvZ3JhbW1pbmc='); return false;">programming</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2024-04-18-git-hooks-and-pre-commit/index.html" class="no-external">
-<p>pre-commit is a multi-language package manager for a set of Git hooks. It is a great tool for projects of any size, helping using and sharing hooks that check for code quality.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2024-04-18-git-hooks-and-pre-commit/index.html" class="no-external">
-<div class="listing-date">
-Apr 18, 2024
-</div>
-<div class="listing-author">
-Gabriel Mello Silva
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="cHl0aG9u" data-listing-date-sort="1678579200000" data-listing-file-modified-sort="1782312664202" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1440">
-<div class="thumbnail"><a href="./posts/2023-03-12-vscode-ipython-setup/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2023-03-12-vscode-ipython-setup/thumbnail.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2023-03-12-vscode-ipython-setup/index.html" class="no-external">Productivity and IPython for Data Science</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/2023-03-12-vscode-ipython-setup/index.html" class="no-external">Set up an interactive Python environment for development in Visual Studio Code</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2023-03-12-vscode-ipython-setup/index.html" class="no-external">
-<p>Failing when working on something new is a given. Iterate quickly, fail fast. This post shows how IPython can change your workflow and how to set up it on VS Code.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2023-03-12-vscode-ipython-setup/index.html" class="no-external">
-<div class="listing-date">
-Mar 12, 2023
-</div>
-<div class="listing-author">
-Gabriel Mello Silva
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="bWF0aCUyQ3B5dGhvbg==" data-listing-date-sort="1644278400000" data-listing-file-modified-sort="1782312664198" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1401">
-<div class="thumbnail"><a href="./posts/2022-02-08-mandelbrot-and-julia-sets/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/2022-02-08-mandelbrot-and-julia-sets/thumbnail.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/2022-02-08-mandelbrot-and-julia-sets/index.html" class="no-external">Mandelbrot and Julia sets</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/2022-02-08-mandelbrot-and-julia-sets/index.html" class="no-external">To infinity and beyond with fractals</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHl0aG9u'); return false;">python</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/2022-02-08-mandelbrot-and-julia-sets/index.html" class="no-external">
-<p>Fractals are a beautifully complex – and I usually do not use these words together – topic in Mathematics. This post scratches the theory behind with two well-know fractals.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/2022-02-08-mandelbrot-and-julia-sets/index.html" class="no-external">
-<div class="listing-date">
-Feb 8, 2022
-</div>
-<div class="listing-author">
-Gabriel Mello Silva
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

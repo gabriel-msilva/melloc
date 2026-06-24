@@ -4,7 +4,14 @@
     "href": "index.html",
     "title": "melloc()",
     "section": "",
-    "text": "Welcome to my blog!\nI write about what I learn in Data Science, programming, and related topics whenever I have something worth sharing. Think of it as a notebook of ideas, learnings, and the occasional nerdy detour.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\npre-commit: Hooks reference\n\n\nA reference guide to pre-commit hooks\n\n\n\nprogramming\n\n\n\nMy selection of commonly used pre-commit hooks for different languages and tools.\n\n\n\n\n\nMay 11, 2024\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nGit Hooks and pre-commit\n\n\nSave time and brainpower to enforce code standards.\n\n\n\nprogramming\n\n\n\npre-commit is a multi-language package manager for a set of Git hooks. It is a great tool for projects of any size, helping using and sharing hooks that check for code quality.\n\n\n\n\n\nApr 18, 2024\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nProductivity and IPython for Data Science\n\n\nSet up an interactive Python environment for development in Visual Studio Code\n\n\n\npython\n\n\n\nFailing when working on something new is a given. Iterate quickly, fail fast. This post shows how IPython can change your workflow and how to set up it on VS Code.\n\n\n\n\n\nMar 12, 2023\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nMandelbrot and Julia sets\n\n\nTo infinity and beyond with fractals\n\n\n\nmath\n\npython\n\n\n\nFractals are a beautifully complex – and I usually do not use these words together – topic in Mathematics. This post scratches the theory behind with two well-know fractals.\n\n\n\n\n\nFeb 8, 2022\n\n\nGabriel Mello Silva\n\n\n\n\n\nNo matching items"
+    "text": "Announcing richer-prompt\n\n\nInteractive terminal prompts for Python\n\n\n\nopen-source\n\npython\n\ncli\n\n\n\n\n\n\n\n\n\nJun 23, 2026\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nAnnouncing streamlit-arborist\n\n\nInteractive tree view for Streamlit\n\n\n\nopen-source\n\npython\n\nstreamlit\n\n\n\n\n\n\n\n\n\nAug 25, 2025\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\npre-commit: Hooks reference\n\n\nA reference guide to pre-commit hooks\n\n\n\nprogramming\n\n\n\nMy selection of commonly used pre-commit hooks for different languages and tools.\n\n\n\n\n\nMay 11, 2024\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nGit Hooks and pre-commit\n\n\nSave time and brainpower to enforce code standards.\n\n\n\nprogramming\n\n\n\npre-commit is a multi-language package manager for a set of Git hooks. It is a great tool for projects of any size, helping using and sharing hooks that check for code quality.\n\n\n\n\n\nApr 18, 2024\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nProductivity and IPython for Data Science\n\n\nSet up an interactive Python environment for development in Visual Studio Code\n\n\n\npython\n\n\n\nFailing when working on something new is a given. Iterate quickly, fail fast. This post shows how IPython can change your workflow and how to set up it on VS Code.\n\n\n\n\n\nMar 12, 2023\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nMandelbrot and Julia sets\n\n\nTo infinity and beyond with fractals\n\n\n\nmath\n\npython\n\n\n\nFractals are a beautifully complex – and I usually do not use these words together – topic in Mathematics. This post scratches the theory behind with two well-know fractals.\n\n\n\n\n\nFeb 8, 2022\n\n\nGabriel Mello Silva\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/2023-03-12-vscode-ipython-setup/index.html",
+    "href": "posts/2023-03-12-vscode-ipython-setup/index.html",
+    "title": "Productivity and IPython for Data Science",
+    "section": "",
+    "text": "IPython session in terminal"
   },
   {
     "objectID": "posts/2023-03-12-vscode-ipython-setup/index.html#introduction",
@@ -161,6 +168,69 @@
     "text": "Final notes\nFractal shapes can be seen in Nature like in a humble cauliflower, but they are also applied in technology, as fractal antennas, or in explaining considerable differences in coastline length measurements.\nAside from its applications, I think fractals are just pretty neat. I mean, look at this:\n\n\n\n\nTo close, my recommendation of a couple of videos from amazing YouTube channels to dive more into fractals.\n\nThis equation will change how you see the world (the logistic map), Veritasium\nFractals are typically not self-similar, 3Blue1Brown"
   },
   {
+    "objectID": "posts/2025-08-25-streamlit-arborist/index.html",
+    "href": "posts/2025-08-25-streamlit-arborist/index.html",
+    "title": "Announcing streamlit-arborist",
+    "section": "",
+    "text": "I’m proud to announce my first open-source Python package: streamlit-arborist, a Streamlit component for visualizing hierarchical data structures as interactive tree views."
+  },
+  {
+    "objectID": "posts/2025-08-25-streamlit-arborist/index.html#motivation",
+    "href": "posts/2025-08-25-streamlit-arborist/index.html#motivation",
+    "title": "Announcing streamlit-arborist",
+    "section": "Motivation",
+    "text": "Motivation\nI worked in a quite large Streamlit application with hundreds of users. It had a file explorer-like interface for navigating pages, so a tree view was a natural widget.\nStreamlit ships a rich set of built-in widgets, but tree navigation is not among them. The closest custom component that existed was streamlit-tree-select but it was not a good fit for our use case.\nWhile we were able to build a custom tree out of HTML + CSS + hacky interaction with the internal Streamlit API, it generated a lot of extra code and we were at risk of being locked to a specific Streamlit version.\nIt bothered me that such tree data structures were not well-represented in the Streamlit ecosystem. So I decided to build a custom component that could be reused in other projects. I knew I didn’t need to reinvent the wheel: React has very mature components for this, and Streamlit allows wrapping them as first-class widgets.\nI found react-arborist, a React component for tree views that is well-maintained and seemed a good choice due to its\n\nFlexible API, which will offer several options for customization and interaction.\nGood performance for large trees, which is important in data-heavy applications."
+  },
+  {
+    "objectID": "posts/2025-08-25-streamlit-arborist/index.html#basic-usage",
+    "href": "posts/2025-08-25-streamlit-arborist/index.html#basic-usage",
+    "title": "Announcing streamlit-arborist",
+    "section": "Basic usage",
+    "text": "Basic usage\n\n\n\n\n\n\nTip\n\n\n\nSee the Usage section in the documentation for more examples.\n\n\nThe data should be a list of dictionaries, where each dictionary represents a node in the tree. Each node should have the following keys:\n\nid (required)\nname: string to display (optional)\nchildren: list of nested nodes (optional)\n\nFor example,\nfrom streamlit_arborist import tree_view\n\ndata = [\n    {\"id\": \"1\", \"name\": \"Node 1\"},\n    {\n        \"id\": \"2\",\n        \"name\": \"Node 2\",\n        \"children\": [\n            {\"id\": \"2.1\", \"name\": \"Node 2.1\"},\n            {\"id\": \"2.2\", \"name\": \"Node 2.2\"}\n        ]\n    }\n]\n\nselected = tree_view(data)\ntree_view returns the full dictionary of the selected node, so any extra keys you include are available downstream.\nThe component comes with a range of options, such as customization of sizing and icons (supports Material Symbols) and programmatic selection and filtering. See the Reference API for more details."
+  },
+  {
+    "objectID": "posts/2025-08-25-streamlit-arborist/index.html#whats-next",
+    "href": "posts/2025-08-25-streamlit-arborist/index.html#whats-next",
+    "title": "Announcing streamlit-arborist",
+    "section": "What’s next",
+    "text": "What’s next\nThis is the initial release with the tree_view component for single-node selection. Future releases may add more interaction modes and customization options.\nFeedback and contributions are welcome on GitHub!"
+  },
+  {
+    "objectID": "posts/2026-06-23-richer-prompt/index.html",
+    "href": "posts/2026-06-23-richer-prompt/index.html",
+    "title": "Announcing richer-prompt",
+    "section": "",
+    "text": "Today I released the first version of richer-prompt, a Python package for interactive terminal prompts built on top of Rich and inspired by Claude Code design."
+  },
+  {
+    "objectID": "posts/2026-06-23-richer-prompt/index.html#motivation",
+    "href": "posts/2026-06-23-richer-prompt/index.html#motivation",
+    "title": "Announcing richer-prompt",
+    "section": "Motivation",
+    "text": "Motivation\nWhen I first started using Claude Code, one of the things that immediately stood out was its terminal user interface. The experience is clean and intuitive, making interactions with an AI agent feel easy directly from the command line.\nThat inspired me to bring some of those interaction patterns to Python’s rich ecosystem.\nrich is already adopted by many popular Python tools, including Typer and FastAPI. Extending it with interactive prompt components allows developers to build fluid CLI applications while staying within the same framework."
+  },
+  {
+    "objectID": "posts/2026-06-23-richer-prompt/index.html#features",
+    "href": "posts/2026-06-23-richer-prompt/index.html#features",
+    "title": "Announcing richer-prompt",
+    "section": "Features",
+    "text": "Features\n\n\n\n\n\n\nTip\n\n\n\nSee the Usage section in the documentation for more details.\n\n\nThe first release focuses on a compact set of prompt primitives for common CLI flows:\n\nSelect for single-choice selection\nMultiSelect for selecting multiple options\nTabs for compact yes/no or mode-style prompts\n\nA number of customization options are available, including:\n\nChoice objects allow for setting value/label/description\nRich theme integration for prompt styling"
+  },
+  {
+    "objectID": "posts/2026-06-23-richer-prompt/index.html#what-is-next",
+    "href": "posts/2026-06-23-richer-prompt/index.html#what-is-next",
+    "title": "Announcing richer-prompt",
+    "section": "What is next",
+    "text": "What is next\nI am planning on adding a “form” prompt (the same you usually see in Claude’s plan mode) that will ask for multiple inputs in a single prompt, reusing the current prompts.\nAlso, I must confess that I am not too happy with the overall complexity of the code, so I may revisit that in the future. First, I wanted to put the package out there.\nstreamlit-arborist proved to me that feedback and ideas from the community can give extra motivation. If you try richer-prompt, I would love your feedback and ideas on GitHub issues."
+  },
+  {
+    "objectID": "posts/2024-04-18-git-hooks-and-pre-commit/index.html",
+    "href": "posts/2024-04-18-git-hooks-and-pre-commit/index.html",
+    "title": "Git Hooks and pre-commit",
+    "section": "",
+    "text": "Git Hooks and pre-commit"
+  },
+  {
     "objectID": "posts/2024-04-18-git-hooks-and-pre-commit/index.html#introduction",
     "href": "posts/2024-04-18-git-hooks-and-pre-commit/index.html#introduction",
     "title": "Git Hooks and pre-commit",
@@ -207,6 +277,6 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "I am Gabriel Mello Silva, currently working as a Machine Learning Engineer at Nubank."
+    "text": "I am Gabriel Mello Silva, currently working as a Machine Learning Engineer at Nubank.\nI started this blog when I got really interested in playing with fractals – shout out to Veritasium! By the way, the profile image above is a Julia set I generated with Python.\nThis is a space where I share my learnings and projects about Data Science, programming, and related topics."
   }
 ]
