@@ -81,7 +81,6 @@ Tip
  ]]></description>
   <category>open-source</category>
   <category>python</category>
-  <category>cli</category>
   <guid>https://gabriel-msilva.github.io/melloc/posts/2026-06-23-richer-prompt/</guid>
   <pubDate>Tue, 23 Jun 2026 00:00:00 GMT</pubDate>
   <media:content url="https://gabriel-msilva.github.io/melloc/posts/2026-06-23-richer-prompt/thumbnail.png" medium="image" type="image/png" height="96" width="144"/>
@@ -217,7 +216,6 @@ font-style: inherit;">=</span> tree_view(data)</span></code></pre></div></div>
  ]]></description>
   <category>open-source</category>
   <category>python</category>
-  <category>streamlit</category>
   <guid>https://gabriel-msilva.github.io/melloc/posts/2025-08-25-streamlit-arborist/</guid>
   <pubDate>Mon, 25 Aug 2025 00:00:00 GMT</pubDate>
   <media:content url="https://gabriel-msilva.github.io/melloc/posts/2025-08-25-streamlit-arborist/thumbnail.png" medium="image" type="image/png" height="96" width="144"/>
@@ -2274,7 +2272,7 @@ font-style: inherit;">"line"</span></span></code></pre></div></div>
 </section>
 
  ]]></description>
-  <category>programming</category>
+  <category>development</category>
   <guid>https://gabriel-msilva.github.io/melloc/posts/2024-05-11-pre-commit-hooks-reference/</guid>
   <pubDate>Sat, 11 May 2024 00:00:00 GMT</pubDate>
   <media:content url="https://gabriel-msilva.github.io/melloc/posts/2024-05-11-pre-commit-hooks-reference/thumbnail.png" medium="image" type="image/png" height="96" width="144"/>
@@ -3350,7 +3348,7 @@ font-style: inherit;">]</span></span></code></pre></div></div>
 </section>
 
  ]]></description>
-  <category>programming</category>
+  <category>development</category>
   <guid>https://gabriel-msilva.github.io/melloc/posts/2024-04-18-git-hooks-and-pre-commit/</guid>
   <pubDate>Thu, 18 Apr 2024 00:00:00 GMT</pubDate>
   <media:content url="https://gabriel-msilva.github.io/melloc/posts/2024-04-18-git-hooks-and-pre-commit/thumbnail.png" medium="image" type="image/png" height="96" width="144"/>
@@ -3887,6 +3885,7 @@ font-style: inherit;">"%autoreload 2"</span>]</span></code></pre></div></div></l
 </section>
 
  ]]></description>
+  <category>development</category>
   <category>python</category>
   <guid>https://gabriel-msilva.github.io/melloc/posts/2023-03-12-vscode-ipython-setup/</guid>
   <pubDate>Sun, 12 Mar 2023 00:00:00 GMT</pubDate>
@@ -4099,7 +4098,7 @@ Figure&nbsp;11: Julia sets <img src="https://latex.codecogs.com/png.latex?J_c(f)
 </section>
 
  ]]></description>
-  <category>math</category>
+  <category>science</category>
   <category>python</category>
   <guid>https://gabriel-msilva.github.io/melloc/posts/2022-02-08-mandelbrot-and-julia-sets/</guid>
   <pubDate>Tue, 08 Feb 2022 00:00:00 GMT</pubDate>
