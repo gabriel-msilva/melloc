@@ -6,7 +6,7 @@ date: 2022-02-08
 abstract: >
   Fractals are a beautifully complex -- and I usually do not use these words together -- topic in Mathematics.
   This post scratches the theory behind with two well-know fractals.
-categories: [math, python]
+categories: [science, python]
 toc: true
 image: thumbnail.png  # https://cdn.pixabay.com/photo/2011/04/21/03/39/romanesco-6996_960_720.jpg
 ---

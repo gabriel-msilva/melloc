@@ -6,7 +6,7 @@ date: 2024-04-18
 abstract: |
   pre-commit is a multi-language package manager for a set of Git hooks.
   It is a great tool for projects of any size, helping using and sharing hooks that check for code quality.
-categories: [programming]
+categories: [development]
 toc: true
 image: thumbnail.png
 ---

@@ -3,7 +3,7 @@ title: Announcing richer-prompt
 subtitle: Interactive terminal prompts for Python
 author: Gabriel Mello Silva
 date: 2026-06-23
-categories: [open-source, python, cli]
+categories: [open-source, python]
 toc: true
 image: thumbnail.png
 ---

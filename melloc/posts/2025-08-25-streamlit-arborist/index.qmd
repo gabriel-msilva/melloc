@@ -3,7 +3,7 @@ title: Announcing streamlit-arborist
 subtitle: Interactive tree view for Streamlit
 author: Gabriel Mello Silva
 date: 2025-08-25
-categories: [open-source, python, streamlit]
+categories: [open-source, python]
 toc: true
 image: thumbnail.png
 ---

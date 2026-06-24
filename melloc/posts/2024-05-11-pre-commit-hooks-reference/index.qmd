@@ -4,7 +4,7 @@ subtitle: A reference guide to pre-commit hooks
 author: Gabriel Mello Silva
 date: 2024-05-11
 abstract: My selection of commonly used pre-commit hooks for different languages and tools.
-categories: [programming]
+categories: [development]
 toc: true
 image: thumbnail.png
 ---
