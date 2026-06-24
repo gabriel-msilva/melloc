@@ -77,7 +77,6 @@ This a simple example of a fractal.
 There are many others that create more complex patterns, but not necessarily by much more complex rules.
 [Gaston Julia](https://en.wikipedia.org/wiki/Gaston_Julia) and Benoit Mandelbrot were influential mathematicians in fractal geometry, well-known for the sets which take their names.
 
-
 ## Mandelbrot set
 
 The Mandelbrot set is the set of complex numbers $c = x + yi$ for which the sequence

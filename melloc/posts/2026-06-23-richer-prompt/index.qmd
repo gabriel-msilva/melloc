@@ -17,7 +17,7 @@ Today I released the first version of `richer-prompt`, a Python package for inte
 pip install richer-prompt
 ```
 
-![](https://raw.githubusercontent.com/gabriel-msilva/richer-prompt/refs/tags/0.1.0/docs/assets/demo.gif)
+![Running richer-prompt demo in the terminal](https://raw.githubusercontent.com/gabriel-msilva/richer-prompt/refs/tags/0.1.0/docs/assets/demo.gif)
 
 ## Motivation
 

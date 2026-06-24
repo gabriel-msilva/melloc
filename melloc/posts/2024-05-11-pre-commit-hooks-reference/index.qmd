@@ -343,8 +343,7 @@ endOfLine: lf
 
 ## YAML
 
-In addition to [Prettier](#webdev-yaml-json-and-more),
-[`yamllint`](https://yamllint.readthedocs.io/en/stable/) provides a code linter for YAML files.
+In addition to [Prettier](#yaml-json-markdown), [`yamllint`](https://yamllint.readthedocs.io/en/stable/) provides a code linter for YAML files.
 
 ```yaml
 repos:
@@ -393,9 +392,7 @@ The [inline ignore syntax](https://yamllint.readthedocs.io/en/stable/disable_wit
 
 ## Markdown
 
-In addition to [Prettier](#webdev-yaml-json-and-more),
-[`markdownlint-cli`](https://github.com/igorshubovych/markdownlint-cli)
-provides a code linter for Markdown files.
+In addition to [Prettier](#yaml-json-markdown), [`markdownlint-cli`](https://github.com/igorshubovych/markdownlint-cli) provides a code linter for Markdown files.
 
 ```yaml
 repos:
@@ -516,7 +513,8 @@ The [inline ignore syntax](https://www.shellcheck.net/wiki/Ignore) is:
 
 ## Docker
 
-Hadolint helps a lot in improving the stability of Docker images as well as reducing their overall size.
+Hadolint helps a lot in improving the stability of Docker images
+as well as reducing their overall size.
 
 ```yaml
 repos:
@@ -538,7 +536,8 @@ ignored:
   - DL3008 # Pin versions in `apt-get install`
 ```
 
-The [inline ignore syntax](https://github.com/hadolint/hadolint?tab=readme-ov-file#ignoring-rules) is:
+The [inline ignore syntax](https://github.com/hadolint/hadolint?tab=readme-ov-file#ignoring-rules)
+is:
 
 - Ignore one or more rules in a file:
 

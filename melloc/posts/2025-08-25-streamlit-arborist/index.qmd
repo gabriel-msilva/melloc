@@ -22,7 +22,6 @@ pip install streamlit-arborist
 
 ![`tree_view()` component in Streamlit](./figures/tree-view.png)
 
-
 ## Motivation
 
 I worked in a quite large Streamlit application with hundreds of users.
@@ -54,9 +53,9 @@ See the [Usage](https://streamlit-arborist.readthedocs.io/stable/usage.html) sec
 The data should be a list of dictionaries, where each dictionary represents a node in the tree.
 Each node should have the following keys:
 
-- `id` (required)
-- `name`: string to display (optional)
-- `children`: list of nested nodes (optional)
+* `id` (required)
+* `name`: string to display (optional)
+* `children`: list of nested nodes (optional)
 
 For example,
 

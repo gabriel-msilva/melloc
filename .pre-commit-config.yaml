@@ -22,6 +22,7 @@ repos:
       - id: markdownlint
         args: ["--fix"]
         files: \.(md|qmd)$
+        types: [text]
 
   # Lint: Fix common misspellings in text files
   - repo: https://github.com/codespell-project/codespell
