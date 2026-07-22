@@ -1,0 +1,54 @@
+---
+title: streamlit-arborist v0.4.0
+subtitle: Checkbox-based tree selection for Streamlit
+author: Gabriel Mello Silva
+date: 2026-06-19
+categories: [open-source, python]
+toc: true
+image: thumbnail.png
+---
+
+Release 0.4.0 introduces `tree_checkbox()`, a new component for checkbox-based selection in tree data.
+
+```sh
+pip install 'streamlit-arborist>=0.4.0'
+```
+
+* Repository: [github.com/gabriel-msilva/streamlit-arborist](https://github.com/gabriel-msilva/streamlit-arborist)
+* Documentation: [streamlit-arborist.readthedocs.io](https://streamlit-arborist.readthedocs.io)
+* Release notes: [Version 0.4.0](https://streamlit-arborist.readthedocs.io/en/stable/releases.html#version-0-4-0-2026-06-19)
+
+![`tree_checkbox()` component in Streamlit](./figures/tree-checkbox.png)
+
+Selection follows parent/child cascading semantics, so checking a parent can select descendants and partial states are handled automatically.
+
+Experiment with the new component in your Streamlit app by running the following code snippet:
+
+```python
+from streamlit_arborist import tree_checkbox
+
+data = [
+    {"id": "1", "name": "Unread"},
+    {"id": "2", "name": "Threads"},
+    {
+        "id": "3",
+        "name": "Chat Rooms",
+        "children": [
+            {"id": "c1", "name": "General"},
+            {"id": "c2", "name": "Random"},
+            {"id": "c3", "name": "Open Source Projects"},
+        ],
+    },
+    {
+        "id": "4",
+        "name": "Direct Messages",
+        "children": [
+            {"id": "d1", "name": "Alice"},
+            {"id": "d2", "name": "Bob"},
+            {"id": "d3", "name": "Charlie"},
+        ],
+    },
+]
+
+tree_checkbox(data, icons={"open": "📂", "closed": "📁", "leaf": "📄"})
+```
