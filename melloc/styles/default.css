@@ -15,3 +15,23 @@ body.quarto-light .listing-description a > code {
   border-radius: 0.35rem;
   padding: 0.1rem 0.35rem;
 }
+
+/* Figure captions can contain inline code (e.g., component names).
+   Keep caption chips readable in both themes. */
+body.quarto-dark figcaption code,
+body.quarto-dark .figure-caption code {
+  color: #dcdcaa;
+  background-color: #2f2f2f;
+  border: 1px solid #3a3a3a;
+  border-radius: 0.35rem;
+  padding: 0.1rem 0.35rem;
+}
+
+body.quarto-light figcaption code,
+body.quarto-light .figure-caption code {
+  color: #8b2f65;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.35rem;
+  padding: 0.1rem 0.35rem;
+}
