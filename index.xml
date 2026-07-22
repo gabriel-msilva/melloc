@@ -86,6 +86,176 @@ Tip
   <media:content url="https://gabriel-msilva.github.io/melloc/posts/2026-06-23-richer-prompt/thumbnail.png" medium="image" type="image/png" height="96" width="144"/>
 </item>
 <item>
+  <title>streamlit-arborist v0.4.0</title>
+  <dc:creator>Gabriel Mello Silva</dc:creator>
+  <link>https://gabriel-msilva.github.io/melloc/posts/2026-06-19-streamlit-arborist-0-4-0/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>Release 0.4.0 introduces <code>tree_checkbox()</code>, a new component for checkbox-based selection in tree data.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'streamlit-arborist&gt;=0.4.0'</span></span></code></pre></div></div>
+<ul>
+<li>Repository: <a href="https://github.com/gabriel-msilva/streamlit-arborist">github.com/gabriel-msilva/streamlit-arborist</a></li>
+<li>Documentation: <a href="https://streamlit-arborist.readthedocs.io">streamlit-arborist.readthedocs.io</a></li>
+<li>Release notes: <a href="https://streamlit-arborist.readthedocs.io/en/stable/releases.html#version-0-4-0-2026-06-19">Version 0.4.0</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://gabriel-msilva.github.io/melloc/posts/2026-06-19-streamlit-arborist-0-4-0/figures/tree-checkbox.png" class="img-fluid figure-img"></p>
+<figcaption><code>tree_checkbox()</code> component in Streamlit</figcaption>
+</figure>
+</div>
+<p>Selection follows parent/child cascading semantics, so checking a parent can select descendants and partial states are handled automatically.</p>
+<p>Experiment with the new component in your Streamlit app by running the following code snippet:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> streamlit_arborist <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> tree_checkbox</span>
+<span id="cb2-2"></span>
+<span id="cb2-3">data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb2-4">    {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Unread"</span>},</span>
+<span id="cb2-5">    {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Threads"</span>},</span>
+<span id="cb2-6">    {</span>
+<span id="cb2-7">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"3"</span>,</span>
+<span id="cb2-8">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Chat Rooms"</span>,</span>
+<span id="cb2-9">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"children"</span>: [</span>
+<span id="cb2-10">            {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"c1"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"General"</span>},</span>
+<span id="cb2-11">            {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"c2"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Random"</span>},</span>
+<span id="cb2-12">            {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"c3"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Open Source Projects"</span>},</span>
+<span id="cb2-13">        ],</span>
+<span id="cb2-14">    },</span>
+<span id="cb2-15">    {</span>
+<span id="cb2-16">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"4"</span>,</span>
+<span id="cb2-17">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Direct Messages"</span>,</span>
+<span id="cb2-18">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"children"</span>: [</span>
+<span id="cb2-19">            {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"d1"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Alice"</span>},</span>
+<span id="cb2-20">            {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"d2"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Bob"</span>},</span>
+<span id="cb2-21">            {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"d3"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Charlie"</span>},</span>
+<span id="cb2-22">        ],</span>
+<span id="cb2-23">    },</span>
+<span id="cb2-24">]</span>
+<span id="cb2-25"></span>
+<span id="cb2-26">tree_checkbox(data, icons<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>{<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"open"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"📂"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"closed"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"📁"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"leaf"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"📄"</span>})</span></code></pre></div></div>
+
+
+
+ ]]></description>
+  <category>open-source</category>
+  <category>python</category>
+  <guid>https://gabriel-msilva.github.io/melloc/posts/2026-06-19-streamlit-arborist-0-4-0/</guid>
+  <pubDate>Fri, 19 Jun 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://gabriel-msilva.github.io/melloc/posts/2026-06-19-streamlit-arborist-0-4-0/thumbnail.png" medium="image" type="image/png" height="96" width="144"/>
+</item>
+<item>
   <title>Announcing streamlit-arborist</title>
   <dc:creator>Gabriel Mello Silva</dc:creator>
   <link>https://gabriel-msilva.github.io/melloc/posts/2025-08-25-streamlit-arborist/</link>

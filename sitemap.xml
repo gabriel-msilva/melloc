@@ -2,34 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/index.html</loc>
-    <lastmod>2026-06-24T21:25:51.440Z</lastmod>
+    <lastmod>2026-07-22T04:36:16.929Z</lastmod>
   </url>
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/posts/2023-03-12-vscode-ipython-setup/index.html</loc>
-    <lastmod>2026-06-24T21:25:51.579Z</lastmod>
+    <lastmod>2026-07-22T04:36:17.065Z</lastmod>
   </url>
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/posts/2024-05-11-pre-commit-hooks-reference/index.html</loc>
-    <lastmod>2026-06-24T21:25:51.582Z</lastmod>
+    <lastmod>2026-07-22T04:36:17.068Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabriel-msilva.github.io/melloc/posts/2026-06-19-streamlit-arborist-0-4-0/index.html</loc>
+    <lastmod>2026-07-22T04:36:17.072Z</lastmod>
   </url>
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/posts/2022-02-08-mandelbrot-and-julia-sets/index.html</loc>
-    <lastmod>2026-06-24T21:25:51.575Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gabriel-msilva.github.io/melloc/posts/2025-08-25-streamlit-arborist/index.html</loc>
-    <lastmod>2026-06-24T21:25:51.585Z</lastmod>
+    <lastmod>2026-07-22T04:36:17.061Z</lastmod>
   </url>
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/posts/2026-06-23-richer-prompt/index.html</loc>
-    <lastmod>2026-06-24T21:25:51.586Z</lastmod>
+    <lastmod>2026-07-22T04:36:17.074Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabriel-msilva.github.io/melloc/posts/2025-08-25-streamlit-arborist/index.html</loc>
+    <lastmod>2026-07-22T04:36:17.070Z</lastmod>
   </url>
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/posts/2024-04-18-git-hooks-and-pre-commit/index.html</loc>
-    <lastmod>2026-06-24T21:25:51.580Z</lastmod>
+    <lastmod>2026-07-22T04:36:17.066Z</lastmod>
   </url>
   <url>
     <loc>https://gabriel-msilva.github.io/melloc/about.html</loc>
-    <lastmod>2026-06-24T21:25:51.440Z</lastmod>
+    <lastmod>2026-07-22T04:36:16.929Z</lastmod>
   </url>
 </urlset>

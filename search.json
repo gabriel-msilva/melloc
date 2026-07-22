@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "melloc()",
     "section": "",
-    "text": "Announcing richer-prompt\n\n\nInteractive terminal prompts for Python\n\n\n\nopen-source\n\npython\n\n\n\n\n\n\n\n\n\nJun 23, 2026\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nAnnouncing streamlit-arborist\n\n\nInteractive tree view for Streamlit\n\n\n\nopen-source\n\npython\n\n\n\n\n\n\n\n\n\nAug 25, 2025\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\npre-commit: Hooks reference\n\n\nA reference guide to pre-commit hooks\n\n\n\ndevelopment\n\n\n\nMy selection of commonly used pre-commit hooks for different languages and tools.\n\n\n\n\n\nMay 11, 2024\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nGit Hooks and pre-commit\n\n\nSave time and brainpower to enforce code standards.\n\n\n\ndevelopment\n\n\n\npre-commit is a multi-language package manager for a set of Git hooks. It is a great tool for projects of any size, helping using and sharing hooks that check for code quality.\n\n\n\n\n\nApr 18, 2024\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nProductivity and IPython for Data Science\n\n\nSet up an interactive Python environment for development in Visual Studio Code\n\n\n\ndevelopment\n\npython\n\n\n\nFailing when working on something new is a given. Iterate quickly, fail fast. This post shows how IPython can change your workflow and how to set up it on VS Code.\n\n\n\n\n\nMar 12, 2023\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nMandelbrot and Julia sets\n\n\nTo infinity and beyond with fractals\n\n\n\nscience\n\npython\n\n\n\nFractals are a beautifully complex – and I usually do not use these words together – topic in Mathematics. This post scratches the theory behind with two well-know fractals.\n\n\n\n\n\nFeb 8, 2022\n\n\nGabriel Mello Silva\n\n\n\n\n\nNo matching items"
+    "text": "Announcing richer-prompt\n\n\nInteractive terminal prompts for Python\n\n\n\nopen-source\n\npython\n\n\n\n\n\n\n\n\n\nJun 23, 2026\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nstreamlit-arborist v0.4.0\n\n\nCheckbox-based tree selection for Streamlit\n\n\n\nopen-source\n\npython\n\n\n\n\n\n\n\n\n\nJun 19, 2026\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nAnnouncing streamlit-arborist\n\n\nInteractive tree view for Streamlit\n\n\n\nopen-source\n\npython\n\n\n\n\n\n\n\n\n\nAug 25, 2025\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\npre-commit: Hooks reference\n\n\nA reference guide to pre-commit hooks\n\n\n\ndevelopment\n\n\n\nMy selection of commonly used pre-commit hooks for different languages and tools.\n\n\n\n\n\nMay 11, 2024\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nGit Hooks and pre-commit\n\n\nSave time and brainpower to enforce code standards.\n\n\n\ndevelopment\n\n\n\npre-commit is a multi-language package manager for a set of Git hooks. It is a great tool for projects of any size, helping using and sharing hooks that check for code quality.\n\n\n\n\n\nApr 18, 2024\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nProductivity and IPython for Data Science\n\n\nSet up an interactive Python environment for development in Visual Studio Code\n\n\n\ndevelopment\n\npython\n\n\n\nFailing when working on something new is a given. Iterate quickly, fail fast. This post shows how IPython can change your workflow and how to set up it on VS Code.\n\n\n\n\n\nMar 12, 2023\n\n\nGabriel Mello Silva\n\n\n\n\n\n\n\n\n\n\n\n\nMandelbrot and Julia sets\n\n\nTo infinity and beyond with fractals\n\n\n\nscience\n\npython\n\n\n\nFractals are a beautifully complex – and I usually do not use these words together – topic in Mathematics. This post scratches the theory behind with two well-know fractals.\n\n\n\n\n\nFeb 8, 2022\n\n\nGabriel Mello Silva\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2023-03-12-vscode-ipython-setup/index.html",
@@ -126,6 +126,13 @@
     "text": "Docker\nHadolint helps a lot in improving the stability of Docker images as well as reducing their overall size.\nrepos:\n  # Lint: Dockerfile\n  - repo: https://github.com/hadolint/hadolint\n    rev: v2.12.0\n    hooks:\n      - id: hadolint\nConfiguration may be done in a .hadolint.yaml file. You can find the list of Rules in the repository.\n# .hadolint.yaml\n\nignored:\n  - DL3008 # Pin versions in `apt-get install`\nThe inline ignore syntax is:\n\nIgnore one or more rules in a file:\n\n# hadolint global ignore=DL3003,DL3006,SC1035\nFROM ubuntu:22.04\n\nRUN echo \"global\"\n\nIgnore one or more rules in a line:\n\n# hadolint ignore=DL3006\nFROM ubuntu\n\n# hadolint ignore=DL3003,SC1035\nRUN echo \"line\""
   },
   {
+    "objectID": "posts/2026-06-19-streamlit-arborist-0-4-0/index.html",
+    "href": "posts/2026-06-19-streamlit-arborist-0-4-0/index.html",
+    "title": "streamlit-arborist v0.4.0",
+    "section": "",
+    "text": "Release 0.4.0 introduces tree_checkbox(), a new component for checkbox-based selection in tree data.\npip install 'streamlit-arborist&gt;=0.4.0'\n\nRepository: github.com/gabriel-msilva/streamlit-arborist\nDocumentation: streamlit-arborist.readthedocs.io\nRelease notes: Version 0.4.0\n\n\n\n\ntree_checkbox() component in Streamlit\n\n\nSelection follows parent/child cascading semantics, so checking a parent can select descendants and partial states are handled automatically.\nExperiment with the new component in your Streamlit app by running the following code snippet:\nfrom streamlit_arborist import tree_checkbox\n\ndata = [\n    {\"id\": \"1\", \"name\": \"Unread\"},\n    {\"id\": \"2\", \"name\": \"Threads\"},\n    {\n        \"id\": \"3\",\n        \"name\": \"Chat Rooms\",\n        \"children\": [\n            {\"id\": \"c1\", \"name\": \"General\"},\n            {\"id\": \"c2\", \"name\": \"Random\"},\n            {\"id\": \"c3\", \"name\": \"Open Source Projects\"},\n        ],\n    },\n    {\n        \"id\": \"4\",\n        \"name\": \"Direct Messages\",\n        \"children\": [\n            {\"id\": \"d1\", \"name\": \"Alice\"},\n            {\"id\": \"d2\", \"name\": \"Bob\"},\n            {\"id\": \"d3\", \"name\": \"Charlie\"},\n        ],\n    },\n]\n\ntree_checkbox(data, icons={\"open\": \"📂\", \"closed\": \"📁\", \"leaf\": \"📄\"})"
+  },
+  {
     "objectID": "posts/2022-02-08-mandelbrot-and-julia-sets/index.html",
     "href": "posts/2022-02-08-mandelbrot-and-julia-sets/index.html",
     "title": "Mandelbrot and Julia sets",
@@ -168,34 +175,6 @@
     "text": "Final notes\nFractal shapes can be seen in Nature like in a humble cauliflower, but they are also applied in technology, as fractal antennas, or in explaining considerable differences in coastline length measurements.\nAside from its applications, I think fractals are just pretty neat. I mean, look at this:\n\n\n\n\nTo close, my recommendation of a couple of videos from amazing YouTube channels to dive more into fractals.\n\nThis equation will change how you see the world (the logistic map), Veritasium\nFractals are typically not self-similar, 3Blue1Brown"
   },
   {
-    "objectID": "posts/2025-08-25-streamlit-arborist/index.html",
-    "href": "posts/2025-08-25-streamlit-arborist/index.html",
-    "title": "Announcing streamlit-arborist",
-    "section": "",
-    "text": "I’m proud to announce my first open-source Python package: streamlit-arborist, a Streamlit component for visualizing hierarchical data structures as interactive tree views."
-  },
-  {
-    "objectID": "posts/2025-08-25-streamlit-arborist/index.html#motivation",
-    "href": "posts/2025-08-25-streamlit-arborist/index.html#motivation",
-    "title": "Announcing streamlit-arborist",
-    "section": "Motivation",
-    "text": "Motivation\nI worked in a quite large Streamlit application with hundreds of users. It had a file explorer-like interface for navigating pages, so a tree view was a natural widget.\nStreamlit ships a rich set of built-in widgets, but tree navigation is not among them. The closest custom component that existed was streamlit-tree-select but it was not a good fit for our use case.\nWhile we were able to build a custom tree out of HTML + CSS + hacky interaction with the internal Streamlit API, it generated a lot of extra code and we were at risk of being locked to a specific Streamlit version.\nIt bothered me that such tree data structures were not well-represented in the Streamlit ecosystem. So I decided to build a custom component that could be reused in other projects. I knew I didn’t need to reinvent the wheel: React has very mature components for this, and Streamlit allows wrapping them as first-class widgets.\nI found react-arborist, a React component for tree views that is well-maintained and seemed a good choice due to its\n\nFlexible API, which will offer several options for customization and interaction.\nGood performance for large trees, which is important in data-heavy applications."
-  },
-  {
-    "objectID": "posts/2025-08-25-streamlit-arborist/index.html#basic-usage",
-    "href": "posts/2025-08-25-streamlit-arborist/index.html#basic-usage",
-    "title": "Announcing streamlit-arborist",
-    "section": "Basic usage",
-    "text": "Basic usage\n\n\n\n\n\n\nTip\n\n\n\nSee the Usage section in the documentation for more examples.\n\n\nThe data should be a list of dictionaries, where each dictionary represents a node in the tree. Each node should have the following keys:\n\nid (required)\nname: string to display (optional)\nchildren: list of nested nodes (optional)\n\nFor example,\nfrom streamlit_arborist import tree_view\n\ndata = [\n    {\"id\": \"1\", \"name\": \"Node 1\"},\n    {\n        \"id\": \"2\",\n        \"name\": \"Node 2\",\n        \"children\": [\n            {\"id\": \"2.1\", \"name\": \"Node 2.1\"},\n            {\"id\": \"2.2\", \"name\": \"Node 2.2\"}\n        ]\n    }\n]\n\nselected = tree_view(data)\ntree_view returns the full dictionary of the selected node, so any extra keys you include are available downstream.\nThe component comes with a range of options, such as customization of sizing and icons (supports Material Symbols) and programmatic selection and filtering. See the Reference API for more details."
-  },
-  {
-    "objectID": "posts/2025-08-25-streamlit-arborist/index.html#whats-next",
-    "href": "posts/2025-08-25-streamlit-arborist/index.html#whats-next",
-    "title": "Announcing streamlit-arborist",
-    "section": "What’s next",
-    "text": "What’s next\nThis is the initial release with the tree_view component for single-node selection. Future releases may add more interaction modes and customization options.\nFeedback and contributions are welcome on GitHub!"
-  },
-  {
     "objectID": "posts/2026-06-23-richer-prompt/index.html",
     "href": "posts/2026-06-23-richer-prompt/index.html",
     "title": "Announcing richer-prompt",
@@ -222,6 +201,34 @@
     "title": "Announcing richer-prompt",
     "section": "What is next",
     "text": "What is next\nI am planning on adding a “form” prompt (the same you usually see in Claude’s plan mode) that will ask for multiple inputs in a single prompt, reusing the current prompts.\nAlso, I must confess that I am not too happy with the overall complexity of the code, so I may revisit that in the future. First, I wanted to put the package out there.\nstreamlit-arborist proved to me that feedback and ideas from the community can give extra motivation. If you try richer-prompt, I would love your feedback and ideas on GitHub issues."
+  },
+  {
+    "objectID": "posts/2025-08-25-streamlit-arborist/index.html",
+    "href": "posts/2025-08-25-streamlit-arborist/index.html",
+    "title": "Announcing streamlit-arborist",
+    "section": "",
+    "text": "I’m proud to announce my first open-source Python package: streamlit-arborist, a Streamlit component for visualizing hierarchical data structures as interactive tree views."
+  },
+  {
+    "objectID": "posts/2025-08-25-streamlit-arborist/index.html#motivation",
+    "href": "posts/2025-08-25-streamlit-arborist/index.html#motivation",
+    "title": "Announcing streamlit-arborist",
+    "section": "Motivation",
+    "text": "Motivation\nI worked in a quite large Streamlit application with hundreds of users. It had a file explorer-like interface for navigating pages, so a tree view was a natural widget.\nStreamlit ships a rich set of built-in widgets, but tree navigation is not among them. The closest custom component that existed was streamlit-tree-select but it was not a good fit for our use case.\nWhile we were able to build a custom tree out of HTML + CSS + hacky interaction with the internal Streamlit API, it generated a lot of extra code and we were at risk of being locked to a specific Streamlit version.\nIt bothered me that such tree data structures were not well-represented in the Streamlit ecosystem. So I decided to build a custom component that could be reused in other projects. I knew I didn’t need to reinvent the wheel: React has very mature components for this, and Streamlit allows wrapping them as first-class widgets.\nI found react-arborist, a React component for tree views that is well-maintained and seemed a good choice due to its\n\nFlexible API, which will offer several options for customization and interaction.\nGood performance for large trees, which is important in data-heavy applications."
+  },
+  {
+    "objectID": "posts/2025-08-25-streamlit-arborist/index.html#basic-usage",
+    "href": "posts/2025-08-25-streamlit-arborist/index.html#basic-usage",
+    "title": "Announcing streamlit-arborist",
+    "section": "Basic usage",
+    "text": "Basic usage\n\n\n\n\n\n\nTip\n\n\n\nSee the Usage section in the documentation for more examples.\n\n\nThe data should be a list of dictionaries, where each dictionary represents a node in the tree. Each node should have the following keys:\n\nid (required)\nname: string to display (optional)\nchildren: list of nested nodes (optional)\n\nFor example,\nfrom streamlit_arborist import tree_view\n\ndata = [\n    {\"id\": \"1\", \"name\": \"Node 1\"},\n    {\n        \"id\": \"2\",\n        \"name\": \"Node 2\",\n        \"children\": [\n            {\"id\": \"2.1\", \"name\": \"Node 2.1\"},\n            {\"id\": \"2.2\", \"name\": \"Node 2.2\"}\n        ]\n    }\n]\n\nselected = tree_view(data)\ntree_view returns the full dictionary of the selected node, so any extra keys you include are available downstream.\nThe component comes with a range of options, such as customization of sizing and icons (supports Material Symbols) and programmatic selection and filtering. See the Reference API for more details."
+  },
+  {
+    "objectID": "posts/2025-08-25-streamlit-arborist/index.html#whats-next",
+    "href": "posts/2025-08-25-streamlit-arborist/index.html#whats-next",
+    "title": "Announcing streamlit-arborist",
+    "section": "What’s next",
+    "text": "What’s next\nThis is the initial release with the tree_view component for single-node selection. Future releases may add more interaction modes and customization options.\nFeedback and contributions are welcome on GitHub!"
   },
   {
     "objectID": "posts/2024-04-18-git-hooks-and-pre-commit/index.html",
